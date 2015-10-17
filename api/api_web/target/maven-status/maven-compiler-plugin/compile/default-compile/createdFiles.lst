@@ -1,5 +1,0 @@
-com/dawaaii/service/api/controller/UserController.class
-com/dawaaii/service/api/controller/APIBaseController.class
-com/dawaaii/service/api/auth/ClientBasicAuthManager.class
-com/dawaaii/service/api/auth/OAuthVoter.class
-com/dawaaii/service/api/auth/UserNamePasswordAuthenticationManager.class
