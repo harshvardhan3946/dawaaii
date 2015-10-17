@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/security/oauth2
+	   	http://www.springframework.org/schema/security/spring-security-oauth2.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath*:applicationContext-services.xml"/>
+
+    <bean id="clientDetails"
+          class="org.springframework.security.oauth2.provider.client.JdbcClientDetailsService">
+        <constructor-arg index="0">
+            <ref bean="${dataSource}"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="userAuthenticationManager"
+          class="com.dawaaii.service.api.auth.UserNamePasswordAuthenticationManager">
+        <constructor-arg index="0">
+            <ref bean="userService"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="userService"
+          class="com.dawaaii.service.user.impl.UserServiceImpl">
+    </bean>
+
+    <bean id="clientBasicAuthManager"
+          class="com.dawaaii.service.api.auth.ClientBasicAuthManager">
+        <constructor-arg index="0">
+            <ref bean="clientDetails"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="tokenStore"
+          class="org.springframework.security.oauth2.provider.token.store.JdbcTokenStore">
+        <constructor-arg ref="${dataSource}"/>
+    </bean>
+
+    <bean id="tokenServices"
+          class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
+        <property name="tokenStore" ref="tokenStore"/>
+        <property name="supportRefreshToken" value="true"/>
+        <property name="clientDetailsService" ref="clientDetails"/>
+        <property name="accessTokenValiditySeconds" value="4500"/>
+    </bean>
+
+    <bean id="oAuth2RequestFactory"
+          class="org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory">
+        <constructor-arg ref="clientDetails"/>
+    </bean>
+    <bean id="userApprovalHandler"
+          class="org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler">
+        <property name="requestFactory" ref="oAuth2RequestFactory"/>
+        <property name="tokenStore" ref="tokenStore"/>
+    </bean>
+
+    <oauth:authorization-server
+            client-details-service-ref="clientDetails" token-services-ref="tokenServices"
+            user-approval-handler-ref="userApprovalHandler">
+        <oauth:authorization-code/>
+        <oauth:implicit/>
+        <oauth:refresh-token/>
+        <oauth:client-credentials/>
+        <oauth:password authentication-manager-ref="userAuthenticationManager"/>
+    </oauth:authorization-server>
+
+    <oauth:resource-server id="resourceServerFilter"
+                           token-services-ref="tokenServices" resource-id="rest_api"/>
+
+
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.access.annotation.Jsr250Voter"/>
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+                <bean class="com.dawaaii.service.api.auth.OAuthVoter"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="clientAuthenticationEntryPoint"
+          class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
+        <property name="realmName" value="Authorization/client"/>
+        <property name="typeName" value="Basic"/>
+    </bean>
+
+    <bean id="oauthAuthenticationEntryPoint"
+          class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
+        <property name="realmName" value="Authorization"/>
+    </bean>
+
+    <bean id="oauthAccessDeniedHandler"
+          class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler"/>
+
+    <bean id="clientCredentialsTokenEndpointFilter"
+          class="org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter">
+        <property name="authenticationManager" ref="clientBasicAuthManager"/>
+    </bean>
+
+    <bean id="oAuth2ClientContextFilter"
+          class="org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter">
+    </bean>
+
+    <sec:http pattern="/oauth/token" use-expressions="true"
+              authentication-manager-ref="clientBasicAuthManager">
+        <sec:intercept-url pattern="/oauth/token"
+                           access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:http-basic entry-point-ref="clientAuthenticationEntryPoint"/>
+        <sec:custom-filter ref="clientCredentialsTokenEndpointFilter"
+                           before="BASIC_AUTH_FILTER"/>
+        <sec:custom-filter ref="oAuth2ClientContextFilter"
+                           after="EXCEPTION_TRANSLATION_FILTER"/>
+        <sec:access-denied-handler ref="oauthAccessDeniedHandler"/>
+    </sec:http>
+
+    <sec:http pattern="/rest/**" create-session="never"
+              authentication-manager-ref="clientBasicAuthManager" access-decision-manager-ref="accessDecisionManager">
+        <sec:anonymous enabled="false"/>
+        <sec:intercept-url pattern="/rest/oauth/token" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/users/confirmemail" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/users/generateotp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/users/resendotp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/users/forgotpassword" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/users" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/api-docs/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/**" access="ROLE_API_USER"/>
+        <sec:custom-filter ref="resourceServerFilter"
+                           before="PRE_AUTH_FILTER"/>
+        <sec:http-basic entry-point-ref="oauthAuthenticationEntryPoint"/>
+        <sec:access-denied-handler ref="oauthAccessDeniedHandler"/>
+    </sec:http>
+
+</beans>

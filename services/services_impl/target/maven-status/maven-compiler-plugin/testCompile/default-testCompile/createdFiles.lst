@@ -1,0 +1,5 @@
+com/dawaaii/service/auth/impl/AccessTokenServiceImplTest.class
+com/dawaaii/service/user/dao/UserRepositoryTest.class
+com/dawaaii/service/auth/impl/TokenGeneratorTest.class
+com/dawaaii/service/auth/dao/AccessTokenRepositoryTest.class
+com/dawaaii/service/otpcount/dao/OTPRequestCountRepositoryTest.class

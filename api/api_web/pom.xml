@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.dawaaii</groupId>
+        <artifactId>api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.dawaaii.api</groupId>
+    <artifactId>api_web</artifactId>
+    <packaging>war</packaging>
+
+    <name>api_web</name>
+    <description>Dawaaii API Web Module</description>
+
+    <properties>
+        <env.basedir>../../env</env.basedir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jetty.version>9.2.6.v20141205</jetty.version>
+        <junit.version>4.12</junit.version>
+        <easymock.version>3.3</easymock.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
+        <spring.security.version>3.2.5.RELEASE</spring.security.version>
+        <ehcache-web.version>2.0.4</ehcache-web.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.dawaaii.services</groupId>
+            <artifactId>services_core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dawaaii.services</groupId>
+            <artifactId>services_impl</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dawaaii</groupId>
+            <artifactId>web_common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+		<!--  Jackson -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.0.7.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
+        <!--
+
+        <dependency>
+           <groupId>com.wordnik</groupId>
+           <artifactId>swagger-annotations</artifactId>
+           <version>1.3.12</version>
+        </dependency>
+         -->
+        <dependency>
+            <groupId>com.mangofactory</groupId>
+            <artifactId>swagger-springmvc</artifactId>
+            <version>0.9.4</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-web</artifactId>
+			<version>${ehcache-web.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>net.sf.ehcache</groupId>
+					<artifactId>ehcache-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+            </plugin>
+            <!-- 
+             
+             <plugin>
+	         <groupId>com.github.kongchen</groupId>
+	         <artifactId>swagger-maven-plugin</artifactId>
+	         <version>2.3</version>
+	         <configuration>
+	            <apiSources>
+	               <apiSource>
+	                  <locations>com.dawaaii</locations>
+	                  <apiVersion>1.0</apiVersion>
+	                  <basePath>http://192.168.1.11:8080/rest</basePath>
+	                  <apiInfo>
+	                     <title>Mobile API</title>
+	                     <description>REST - mobile api</description>
+	                  </apiInfo>
+	                  <swaggerDirectory>${basedir}/src/main/webapp/docs</swaggerDirectory>
+	                  <swaggerUIDocBasePath>http://192.168.1.11:8080/docs</swaggerUIDocBasePath>
+	                  <useOutputFlatStructure>false</useOutputFlatStructure>
+	               </apiSource>
+	            </apiSources>	            
+	         </configuration>	         
+	         <executions>
+	            <execution>
+	               <phase>package</phase>
+	               <goals>
+	                  <goal>generate</goal>
+	               </goals>
+	            </execution>
+	         </executions>
+	      </plugin>
+	      -->
+        </plugins>
+    </build>
+
+</project>

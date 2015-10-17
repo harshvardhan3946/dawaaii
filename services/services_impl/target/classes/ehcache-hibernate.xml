@@ -1,0 +1,72 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../config/ehcache.xsd"
+		name="hibernateCacheManager">
+
+    <!-- Currently all objects/queries have their own cache region.
+         This makes it possible to be very flexible in the configuration of caching.
+         But it might also become too complex to maintain. In that case similar objects
+         can be combined into one region -->
+
+    <!--
+         This is useful when having many hits (high load - many request within 5 minutes).
+         With less visitors some regions (for which data doesn't become stale very quickly)
+         can be configured to refresh after a longer period so a visitor doesn't have
+         to load everything from the database if there wasn't a visitor within 5 mins. before -->
+
+    <!--
+    	Mandatory Default Cache configuration. These settings will be applied to caches
+    	created programmtically using CacheManager.add(String cacheName)
+    -->
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="false"/>
+
+    <!--
+        This cache is used if you use a query cache without setting a name.
+        A typical ehcache.xml configuration is
+    <cache
+            name="org.hibernate.cache.StandardQueryCache"
+            maxElementsInMemory="500"
+            eternal="false"
+            timeToLiveSeconds="30"
+            overflowToDisk="false"/>
+
+        Tracks the timestamps of the most recent updates to particular tables.
+        It is important that the cache timeout of the underlying cache implementation be
+        set to a higher value than the timeouts of any of the query caches.
+        In fact, it is recommend that the the underlying cache not be configured for expiry at all.
+     
+    <cache
+            name="org.hibernate.cache.UpdateTimestampsCache"
+            maxElementsInMemory="50000"
+            eternal="true"
+            overflowToDisk="false"/>
+	-->
+    <cache name="com.dawaaii.device.model.Device"
+           maxElementsInMemory="5000"
+           overflowToDisk="false"
+           diskPersistent="false"
+           eternal="false"
+           timeToLiveSeconds="300"
+            />
+
+    <cache name="com.dawaaii.service.user.model.User"
+           maxElementsInMemory="5000"
+           overflowToDisk="false"
+           diskPersistent="false"
+           eternal="false"
+           timeToLiveSeconds="300"
+            />
+
+    <cache name="com.dawaaii.vehicle.model.Vehicle"
+           maxElementsInMemory="5000"
+           overflowToDisk="false"
+           diskPersistent="false"
+           eternal="false"
+           timeToLiveSeconds="300"
+    />
+
+</ehcache>

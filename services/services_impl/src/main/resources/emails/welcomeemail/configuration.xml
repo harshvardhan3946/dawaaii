@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<emailtemplateconfiguration>
+<includes>
+    <include>
+        <templatename>welcomeemail</templatename>
+        <templaterootfolder>welcomeemail/</templaterootfolder>
+    </include>
+</includes>
+</emailtemplateconfiguration>
