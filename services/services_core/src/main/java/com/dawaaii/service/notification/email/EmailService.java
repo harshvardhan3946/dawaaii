@@ -7,4 +7,9 @@ import com.dawaaii.service.user.model.UserOTP;
 public interface EmailService {
 
     void sendUserOTPEmail(User user, UserOTP userOTP);
+
+    void sendWelcomeEmail(String email, String firstName);
+
+    void sendEmail(String fromAddress, String string, String emailAddress, String subject, String bodyText, String bodyHtml);
+
 }

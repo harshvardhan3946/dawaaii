@@ -18,7 +18,8 @@
     
     <bean id="hazelcastClientService" class="com.dawaaii.service.cache.impl.HazelcastClientServiceImpl">
         <property name="clusterName" value="${hazelcast.client.cluster.name}"/>
-        <property name="clusterPassword" value="${hazelcast.client.cluster.password}"/>
+        <property name="clusterPassword" value="
+        ${hazelcast.client.cluster.password}"/>
         <property name="nodeAdresses" value="${hazelcast.client.cluster.nodes}"/>
         <property name="connectionPoolSize" value="${hazelcast.client.connectionpool.size}"/>
     </bean>

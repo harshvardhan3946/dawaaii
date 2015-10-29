@@ -10,6 +10,7 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.support.converter.MessageConverter;
@@ -19,6 +20,9 @@ import org.springframework.stereotype.Service;
 public class AsyncEmailServiceImpl extends SimpleMessageProducer implements EmailService {
 
     private final static Logger LOG = LoggerFactory.getLogger(AsyncEmailServiceImpl.class);
+
+    @Value("${email.from}")
+    private String from;
 
     private final JmsTemplate jmsTemplate;
     private final MessageConverter messageConverter;
@@ -43,5 +47,32 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     @Override
     public void sendUserOTPEmail(User user, UserOTP userOTP) {
 
+    }
+
+    @Override
+    public void sendWelcomeEmail(String email, String firstName) {
+        try {
+            String subject =  "Welcome to dawaaii.in";
+            String body = "Dear "+firstName+",\n\nThis email is intended to welcome you at dawaaii.in.\n\nCheers\nTeam Dawaaii";
+            sendEmail(from, "INFO", email, subject, body, null);
+
+        } catch (Exception ex) {
+            LOG.error("error while sending welcome email", ex);
+        }
+    }
+
+
+    @Override
+    public void sendEmail(String fromAddress, String fromName, String emailAddress, String subject, String bodyText, String bodyHtml) {
+        SendEmail emailMessage = new SendEmail();
+        emailMessage.setFromAddress(fromAddress);
+        emailMessage.setFromName(fromName);
+        emailMessage.setToAddress(emailAddress);
+        emailMessage.setSubject(subject);
+        emailMessage.setBodyText(bodyText);
+        emailMessage.setBodyHtml(bodyHtml);
+        emailMessage.setSimpleMessage(true);
+
+        send(emailMessage);
     }
 }
