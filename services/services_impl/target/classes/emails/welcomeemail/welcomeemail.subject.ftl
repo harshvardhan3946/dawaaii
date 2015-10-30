@@ -1,0 +1,1 @@
+${messages["welcomeemail.ftl.message.subject"]}
