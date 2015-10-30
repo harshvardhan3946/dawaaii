@@ -1,4 +1,0 @@
-com/dawaaii/scheduler/jobs/testing/HelloWorldJob.class
-com/dawaaii/scheduler/jobs/AbstractSpringApplicationContextJob.class
-com/dawaaii/scheduler/jobs/AbstractSpringApplicationContextStatefulJob.class
-com/dawaaii/scheduler/jobs/testing/HelloWorldTestJob.class
