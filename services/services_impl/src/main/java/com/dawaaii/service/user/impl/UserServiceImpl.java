@@ -29,18 +29,27 @@ public class UserServiceImpl implements UserService {
 
     private final static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private UserOneTimePasswordRepository userOneTimePasswordRepository;
-    @Autowired
     private EmailService asyncMailService;
-    @Autowired
     private TokenGenerator tokenGenerator;
-    @Autowired
     private DawaaiiRoleService dawaaiiRoleService;
-
     private OTPRequestService otpRequestService;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository,
+                           UserOneTimePasswordRepository userOneTimePasswordRepository,
+                           EmailService asyncMailService,
+                           TokenGenerator tokenGenerator,
+                           DawaaiiRoleService dawaaiiRoleService,
+                           OTPRequestService otpRequestService) {
+        this.userRepository = userRepository;
+        this.userOneTimePasswordRepository = userOneTimePasswordRepository;
+        this.asyncMailService = asyncMailService;
+        this.tokenGenerator = tokenGenerator;
+        this.dawaaiiRoleService = dawaaiiRoleService;
+        this.otpRequestService = otpRequestService;
+    }
 
     @Transactional
     @Override
@@ -55,12 +64,13 @@ public class UserServiceImpl implements UserService {
             user.addRole(role);
         }
         User savedUser = userRepository.save(user);
-        if (!savedUser.isEmailConfirmed()) {
+       /* if (!savedUser.isEmailConfirmed()) {
             UserOTP userOTP = tokenGenerator.generateOTP(savedUser, OTPType.CONFIRM_EMAIL, OTPSource.getSource(user.getCreationSource()));
             saveOtpAndSendEmail(savedUser, userOTP);
             initOtpRequestCount(user, OTPType.CONFIRM_EMAIL, userOTP.getOtpSource());
-        }
+        }*/
         //create default preferences for this user
+        asyncMailService.sendWelcomeEmail(user.getEmail(), user.getFirstName());
         LOG.info("Created new user {}", user.getEmail());
         return savedUser;
     }
