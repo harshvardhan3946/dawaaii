@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Ignore
-public class UserRepositoryTest {
+public class UserRepositoryTest{
 
     @Autowired
     private UserRepository userRepository;

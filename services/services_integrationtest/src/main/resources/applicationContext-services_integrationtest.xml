@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xsi:schemaLocation="http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
     <import resource="classpath*:applicationContext-services.xml"/>
 
-    <!-- Uncomment this for local integration test, to connect to single mongo instance.
+     <!--Uncomment this for local integration test, to connect to single mongo instance.-->
 
-    <mongo:mongo id="iconnectReplicaSetMongo" host="${mongo.host}" port="${mongo.port}"/>
-    <mongo:db-factory id="iconnectMongoDBFactory" dbname="${mongo.dbname}" mongo-ref="iconnectReplicaSetMongo"/>
+    <mongo:mongo id="dawaaiiReplicaSetMongo" host="${mongo.host}" port="${mongo.port}"/>
+    <mongo:db-factory id="dawaaiiMongoDBFactory" dbname="${mongo.dbname}" mongo-ref="dawaaiiReplicaSetMongo"/>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoDbFactory" ref="iconnectMongoDBFactory" />
+        <constructor-arg name="mongoDbFactory" ref="dawaaiiMongoDBFactory" />
     </bean>
-    -->
     <context:component-scan base-package="com.dawaaii"/>
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

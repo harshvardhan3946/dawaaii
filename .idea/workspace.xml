@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dbb0bcc5-22fa-4716-ad69-6f9d54aa3f7b" name="Default" comment="" />
+    <list default="true" id="dbb0bcc5-22fa-4716-ad69-6f9d54aa3f7b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_core/src/main/java/com/dawaaii/service/mongo/ambulance/model/Ambulance.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/api_web/src/main/java/com/dawaaii/service/api/controller/AmbulanceController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_impl/src/main/java/com/dawaaii/service/dao/mongo/AmbulanceRepository.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_impl/src/test/java/com/dawaaii/service/ambulance/dao/AmbulanceRepositoryTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_core/src/main/java/com/dawaaii/service/mongo/ambulance/AmbulanceService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_impl/src/main/java/com/dawaaii/service/ambulance/impl/AmbulanceServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_impl/src/test/java/com/dawaaii/service/ambulance/impl/AmbulanceServiceImplTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_integrationtest/src/test/java/com/dawaaii/ambulance/AmbulanceServiceTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_core/src/main/java/com/dawaaii/service/mongo/BaseDocument.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_integrationtest/src/main/java/com/dawaaii/test/InsertAmbulanceData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/services_core/src/main/java/com/dawaaii/service/property/model/Property.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dbscripts/src/main/resources/mongouserauthenticationsetup" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/api/api_web/src/main/java/com/dawaaii/service/api/controller/CorsFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/services/services_impl/src/test/resources/iconnect_services_test.properties" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/services/services_impl/src/test/resources/iconnect_services_test.properties" afterPath="$PROJECT_DIR$/services/services_impl/src/test/resources/dawaaii_services_test.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_integrationtest/src/main/java/com/dawaaii/test/IntegrationTestDataSetUp.java" afterPath="$PROJECT_DIR$/services/services_integrationtest/src/main/java/com/dawaaii/test/IntegrationTestDataSetUp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_impl/src/test/java/com/dawaaii/service/user/dao/UserRepositoryTest.java" afterPath="$PROJECT_DIR$/services/services_impl/src/test/java/com/dawaaii/service/user/dao/UserRepositoryTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/api_web/api_web.iml" afterPath="$PROJECT_DIR$/api/api_web/api_web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_impl/src/main/resources/applicationContext-datasource.xml" afterPath="$PROJECT_DIR$/services/services_impl/src/main/resources/applicationContext-datasource.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_integrationtest/src/main/resources/applicationContext-services_integrationtest.xml" afterPath="$PROJECT_DIR$/services/services_integrationtest/src/main/resources/applicationContext-services_integrationtest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core.iml" afterPath="$PROJECT_DIR$/core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_impl/src/main/resources/dawaaii_services.properties" afterPath="$PROJECT_DIR$/services/services_impl/src/main/resources/dawaaii_services.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_integrationtest/src/main/resources/dawaaii_services_integrationtest.properties" afterPath="$PROJECT_DIR$/services/services_integrationtest/src/main/resources/dawaaii_services_integrationtest.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/dev.properties" afterPath="$PROJECT_DIR$/env/dev.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/inttest.properties" afterPath="$PROJECT_DIR$/env/inttest.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/local.properties" afterPath="$PROJECT_DIR$/env/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/perf.properties" afterPath="$PROJECT_DIR$/env/perf.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/perfqa.properties" afterPath="$PROJECT_DIR$/env/perfqa.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/prod.properties" afterPath="$PROJECT_DIR$/env/prod.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/qa.properties" afterPath="$PROJECT_DIR$/env/qa.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scheduler/scheduler.iml" afterPath="$PROJECT_DIR$/scheduler/scheduler.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services.iml" afterPath="$PROJECT_DIR$/services/services.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_core/services_core.iml" afterPath="$PROJECT_DIR$/services/services_core/services_core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/services_impl/services_impl.iml" afterPath="$PROJECT_DIR$/services/services_impl/services_impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/api_web/src/main/webapp/WEB-INF/spring-security.xml" afterPath="$PROJECT_DIR$/api/api_web/src/main/webapp/WEB-INF/spring-security.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/env/stage.properties" afterPath="$PROJECT_DIR$/env/stage.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="core.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -84,11 +123,11 @@
       <file leaf-file-name="spring-security.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/api_web/src/main/webapp/WEB-INF/spring-security.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.16" vertical-offset="1881" max-vertical-offset="2235">
-              <caret line="134" column="54" selection-start-line="134" selection-start-column="54" selection-end-line="134" selection-end-column="54" />
+            <state vertical-scroll-proportion="-5.16" vertical-offset="1851" max-vertical-offset="2205">
+              <caret line="132" column="54" selection-start-line="132" selection-start-column="54" selection-end-line="132" selection-end-column="54" />
               <folding>
                 <element signature="e#945#960#0" expanded="true" />
-                <element signature="e#1720#1735#0" expanded="true" />
+                <element signature="e#1489#1492#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,8 +136,8 @@
       <file leaf-file-name="BaseController.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web_common/src/main/java/com/dawaaii/web/common/controller/BaseController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5555556" vertical-offset="0" max-vertical-offset="285">
-              <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.30864197" vertical-offset="0" max-vertical-offset="285">
+              <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -107,8 +146,8 @@
       <file leaf-file-name="applicationContext-services_integrationtest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/services_integrationtest/src/main/resources/applicationContext-services_integrationtest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="263" max-vertical-offset="630">
-              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="278" max-vertical-offset="645">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -384,7 +423,45 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="dawaaii" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dawaaii" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services_integrationtest" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dawaaii" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -925,6 +1002,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dbscripts" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dawaaii" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbscripts" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1506,16 +1609,16 @@
       <workItem from="1446294452678" duration="2783000" />
       <workItem from="1446444585529" duration="2750000" />
       <workItem from="1446461823716" duration="8078000" />
-      <workItem from="1446618436904" duration="15229000" />
+      <workItem from="1446618436904" duration="15388000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87347000" />
+    <option name="totallyTimeSpent" value="87506000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1538,7 +1641,7 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962668" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25496426" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25496426" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1621,7 +1724,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/services/services_integrationtest/src/main/java/com/dawaaii/test/IntegrationTestDataSetUp.java</url>
-          <line>39</line>
+          <line>46</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
@@ -1687,7 +1790,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/services/services_integrationtest/src/main/java/com/dawaaii/test/IntegrationTestDataSetUp.java</url>
-          <line>44</line>
+          <line>54</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -1864,8 +1967,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="358" max-vertical-offset="795">
           <caret line="47" column="11" selection-start-line="45" selection-start-column="7" selection-end-line="47" selection-end-column="11" />
           <folding>
-            <element signature="e#1115#1116#0" expanded="true" />
-            <element signature="e#1170#1171#0" expanded="true" />
+            <element signature="e#1473#1474#0" expanded="true" />
+            <element signature="e#1537#1538#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1962,8 +2065,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/services/services_integrationtest/src/main/resources/applicationContext-services_integrationtest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="263" max-vertical-offset="630">
-          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="278" max-vertical-offset="645">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -2013,19 +2116,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/api_web/src/main/webapp/WEB-INF/spring-security.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.16" vertical-offset="1881" max-vertical-offset="2235">
-          <caret line="134" column="54" selection-start-line="134" selection-start-column="54" selection-end-line="134" selection-end-column="54" />
+        <state vertical-scroll-proportion="-5.16" vertical-offset="1851" max-vertical-offset="2205">
+          <caret line="132" column="54" selection-start-line="132" selection-start-column="54" selection-end-line="132" selection-end-column="54" />
           <folding>
             <element signature="e#945#960#0" expanded="true" />
-            <element signature="e#1720#1735#0" expanded="true" />
+            <element signature="e#1489#1492#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web_common/src/main/java/com/dawaaii/web/common/controller/BaseController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5555556" vertical-offset="0" max-vertical-offset="285">
-          <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.30864197" vertical-offset="0" max-vertical-offset="285">
+          <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
           <folding />
         </state>
       </provider>

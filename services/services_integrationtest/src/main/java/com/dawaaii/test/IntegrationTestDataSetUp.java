@@ -1,5 +1,6 @@
 package com.dawaaii.test;
 
+import com.dawaaii.service.mongo.ambulance.AmbulanceService;
 import com.dawaaii.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * Created by root on 29/10/15.
+ * Created by rohit on 29/10/15.
  */
 @Component
 @Lazy(value = false)
@@ -28,21 +29,30 @@ public class IntegrationTestDataSetUp {
     private UserService userService;
 
     @Autowired
+    private AmbulanceService ambulanceService;
+
+    @Autowired
     private InsertUserData insertUserData;
+
+    /*@Autowired
+    private InsertAmbulanceData insertAmbulanceData;*/
 
     @PostConstruct
     @Transactional
     public void insertReferenceData() {
-        if (isFillData()) {
-            //TODO: insert ref data here.
-
+        if (isFillUserData()) {
             insertUserData.insertData();
-
         }
+       /* if (isFillAmbulanceData()) {
+            insertAmbulanceData.insertData();
+        }*/
     }
 
-    private boolean isFillData() {
+    private boolean isFillUserData() {
         return userService.getUsersCount() == 0;
+    }
+    private boolean isFillAmbulanceData() {
+        return ambulanceService.getAmbulanceCount() == 0;
     }
 
 }
