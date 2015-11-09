@@ -50,6 +50,7 @@ public class InsertUserData {
         user.setGender(gender);
         user.setActive(active);
         user.setPassword(password);
+        user.setPhoneNumber("9999175430");
         user.setCreationSource(UserCreationSource.WEBSITE);
         return user;
     }

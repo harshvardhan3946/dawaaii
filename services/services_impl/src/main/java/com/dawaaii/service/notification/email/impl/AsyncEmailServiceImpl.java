@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service(value = "asyncMailService")
@@ -23,6 +25,9 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
 
     @Value("${email.from}")
     private String from;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     private final JmsTemplate jmsTemplate;
     private final MessageConverter messageConverter;
@@ -35,14 +40,16 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         this.mailQueue = mailQueue;
     }
 
+/*
     private void send(SendEmail mail) {
         LOG.debug("Sending email message to queue: {}", mail);
         MessageCreator messageCreator = session ->
                 messageConverter.toMessage(mail, session);
-        jmsTemplate.send(mailQueue, messageCreator);
+        //jmsTemplate.send(mailQueue, messageCreator);
 
         LOG.debug("Sending email message to queue done!");
     }
+*/
 
     @Override
     public void sendUserOTPEmail(User user, UserOTP userOTP) {
@@ -52,8 +59,8 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     @Override
     public void sendWelcomeEmail(String email, String firstName) {
         try {
-            String subject =  "Welcome to dawaaii.in";
-            String body = "Dear "+firstName+",\n\nThis email is intended to welcome you at dawaaii.in.\n\nCheers\nTeam Dawaaii";
+            String subject = "Welcome to dawaaii.in";
+            String body = "Dear " + firstName + ",\n\nThis email is intended to welcome you at dawaaii.in.\n\nCheers\nTeam Dawaaii";
             sendEmail(from, "INFO", email, subject, body, null);
 
         } catch (Exception ex) {
@@ -74,5 +81,27 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         emailMessage.setSimpleMessage(true);
 
         send(emailMessage);
+    }
+
+    private void send(SendEmail message) {
+        try {
+            if (message.isSimpleMessage()) {
+                SimpleMailMessage simpleMessage = createSimpleMailMessageFor(message);
+                javaMailSender.send(simpleMessage);
+            }
+            LOG.debug("Email sending done for given message: ", message);
+        } catch (Exception ex) {
+            LOG.error("Error sending email: " + message, ex);
+            //throw ex;
+        }
+    }
+
+    private SimpleMailMessage createSimpleMailMessageFor(SendEmail sendEmail) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(sendEmail.getToAddress());
+        simpleMailMessage.setSubject(sendEmail.getSubject());
+        simpleMailMessage.setFrom(sendEmail.getFromAddress());
+        simpleMailMessage.setText(sendEmail.getBodyText());
+        return simpleMailMessage;
     }
 }

@@ -17,4 +17,6 @@ public interface AmbulanceService {
 
     Long getAmbulanceCount();
 
+    void confirmBooking(Ambulance ambulance);
+
 }

@@ -39,4 +39,12 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     public Long getAmbulanceCount() {
         return ambulanceRepository.count();
     }
+
+    @Override
+    public void confirmBooking(Ambulance ambulance) {
+        //ToDO 1) Send Email to the ambulance service provider and user
+        //Todo 2) Send sms to user and ambulance number
+
+
+    }
 }

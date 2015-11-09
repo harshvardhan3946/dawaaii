@@ -29,10 +29,13 @@ private AmbulanceService ambulanceService;
     public AmbulanceController(AmbulanceService ambulanceService){
         this.ambulanceService = ambulanceService;
     }
+
     @ApiOperation(value = "get ambulance list")
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> getAllAmbulances(){
         return success().withEntity("Ambulances",ambulanceService.getAmbulance()).respond();
     }
+
+
 }

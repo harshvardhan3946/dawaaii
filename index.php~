@@ -1,0 +1,508 @@
+<?php include'admin/dbc.php'; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+<meta name='verify-v1' content='1e470597ffe8b80bb524b403a9d7a7d5'/>
+<title>Best Life Insurance Plans in India | Buy Online Policies in India</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="p:domain_verify" content="24d399342dfa91e2ed204569a0e8f247"/>
+<meta name='verify-v1' content='eb1364aa114277b94353c61607ad88c8'/>
+<meta name="keywords" content="Insurance policies in india, Online Insurance, Life insurance policies in india, Buy policy online, best insurance policy in india, best insurance plans in india" />
+<meta name="description" content="Best Life Insurance Policy in India - Bima Zones help its customers to choose best online plan available in India and save their money"/>
+<link href="/demo/cssMobile/style.css" rel="stylesheet" type="text/css" />
+<link href="/demo/Styles/StyleSheet2.css" rel="stylesheet" type="text/css" />
+<link href="/demo/Styles/test_auto.css" type="text/css" rel="stylesheet" />
+<link href="demo/StyleSheel/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/js/1.js"></script>  
+
+<link rel="publisher" href=" https://plus.google.com/+Bimazones"/>
+<link rel="canonical" href="http://www.bimazones.com/"/>
+
+<meta name="google-site-verification" content="ERlnAYNbpzjxJda_-9e2CF2bnf64pt-K_EhPgFLIqAs"/>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66147739-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+   <script type="text/javascript" src="/js/1.js"></script>    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".accordion .accord-header").click(function() {
+            if($(this).next("div").is(":visible")){
+                $(this).next("div").slideUp("slow");
+            } else {
+                $(".accordion .accord-content").slideUp("slow");
+                $(this).next("div").slideToggle("slow");
+            }
+        });
+   
+    
+       
+     });
+    </script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $(".accordion .accord-header").click(function() {
+            if($(this).next("div").is(":visible")){
+                $(this).next("div").slideUp("slow");
+            } else {
+                $(".accordion .accord-content").slideUp("slow");
+                $(this).next("div").slideToggle("slow");
+            }
+        });
+   
+    
+       
+     });
+    </script>
+
+<script src="/demo/Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        .nav a {
+            color: #fff !important;
+        }
+        .tabs
+        {
+            list-style: none;
+        }
+        .tabs li
+        {
+            font-family: Square721 Cn BT;
+            font-size: 17px;
+            
+            display: inline;
+            background-color: #212121;
+            color: White;
+        }
+
+        .bimazone_number {
+            color: #f3e23a;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 15px;
+    padding-left: 0;
+    padding-right: 10px;
+    padding-top: 20px;
+        }
+
+        
+    
+
+
+        .tabs li a
+        {
+            color: White;
+            float: left;
+            text-align: center;
+            display: block;
+            padding: 4px 11px;
+            margin-left: 1px;
+            position: relative;
+            left: -1px;
+            background-color: #212121;
+            text-decoration: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .tabs li a:hover
+        {
+            background-color: #6B6B6B;
+            border-bottom-right-radius: 7px;
+            border-bottom-left-radius: 7px;
+            cursor: pointer;
+        }
+        
+        .group:after
+        {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+        }
+        .liactive
+        {
+            background-color: #6B6B6B !important;
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
+        }
+        
+        #box-one:target, #box-two:target, #box-three:target
+        {
+            z-index: 1;
+        }
+        .FirstTab
+        {
+            border-bottom-left-radius: 7px;
+        }
+        .LastTab
+        {
+            border-bottom-right-radius: 7px;
+            padding-bottom: 23px;
+            padding-top: 23px;
+            padding-left: 54px;
+            padding-right: 54px;
+            float: left;
+        }
+        .CompareRowHeight
+        {
+            font-family: Square721 Cn BT;
+            font-size: 17px;
+            padding-bottom: 4px;
+            padding-top: 4px;
+        }
+        ul.services li a:hover {
+    background-color: #228B22 !important;
+}
+
+ul.services li a:hover {
+    background-color: #228b22 !important;
+    background-image: linear-gradient(to bottom, #228b22, #228b22) !important;
+    }
+
+    ul.services li:first-child a {
+    border-left: 2px double #e1bb13;
+}
+
+ul.services li a {
+    //background-repeat: repeat-x;
+    border-left: 1px solid #fff !important;
+    border-right: 1px solid #fff !important;
+    
+}
+
+ul.services li:first-child a {
+    border-left: 2px double #fff !important;
+}
+
+
+    </style>
+    
+    <style type="text/css">
+        .ajax__tab_disabled
+        {
+            float: right; /*border-left:1px solid white;*/
+        }
+        .News
+        {
+            color: White;
+            font-family: Square721 Cn BT;
+        }
+        .News:hover
+        {
+            color: rgb(214, 168, 50);
+        }
+        .SetHeight
+        {
+            font-family: Square721 Cn BT;
+            font-size: 19px;
+            color: #0D0D0D;
+            margin: 12px 0;
+            font-weight: bold;
+            padding-top: 20px;
+            padding-bottom: 5px;
+        }
+        .tmpCSS
+        {
+            padding-top: 20px;
+        }
+        #wrapper
+        {
+            background-color: #212121; /*border-top: 1px solid #ccc;*/
+            height: 100px;
+            margin-top: -1px;
+            left: 0;
+            top: 50%;
+        }
+        #carousel
+        {
+            /*margin-top: -100px;*/
+        }
+        #carousel div
+        {
+            text-align: center;
+            width: auto;
+            height: auto;
+            float: left;
+            position: relative;
+            box-shadow: 2px 2px 4px #000;
+        }
+        #carousel div img
+        {
+            border: none;
+        }
+        #carousel div span
+        {
+            display: none;
+        }
+        #carousel div:hover span
+        {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, Geneva, SunSans-Regular, sans-serif;
+            font-size: 14px;
+            line-height: 22px;
+            display: inline-block;
+            width: 100px;
+            padding: 2px 0;
+            margin: 0 0 0 -50px;
+            position: absolute; /*bottom: 30px;*/
+            left: 50%;
+            border-radius: 3px;
+        }
+        
+        #donate-spacer
+        {
+            height: 100%;
+        }
+        #donate
+        {
+            width: 750px;
+            padding: 50px 75px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        #donate p, #donate form
+        {
+            margin: 0;
+            float: left;
+        }
+        #donate p
+        {
+            width: 650px;
+        }
+        #donate form
+        {
+            width: 100px;
+        }
+        .IconWidth
+        {
+            width: 45px;
+        }
+
+        .main_contnet_div
+        {
+        width:100%;
+        height: auto;
+        float: left;
+        margin: auto;
+        background-color: ivory;
+        }
+
+.content_heading
+        {   
+            width: 100%;
+            height:auto;
+            float: left;
+            margin: auto;
+            text-align: center;
+            
+
+        }
+
+.content_heading h2{
+            color: #020202;
+            font-family: arial;
+            font-weight: bold;
+            padding-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 16px;
+        }
+        .content_aboutus {
+    float: left;
+    font-size:20px;
+    height: auto;
+    margin-bottom: 0;
+    margin-left: 88px;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 0;
+    padding-top: 0;
+    text-align: justify;
+    width: 84%;
+    color: #020202;
+    font-family: arial;
+}
+    </style>
+    
+    <script src="/demo/JQuery/jquery.min.js" type="text/javascript"></script>
+    
+</head>
+<body>
+<table width="100%" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td style="width: 100%">
+                <div class="header">
+                    <div id="nav" class="opacity" style="height: 84px; background:rgba(37, 37, 37, 44) none repeat scroll 0 0;">
+                        <div class="headerstyle">
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td width="15%" valign="top" style="padding-left: 10px;">
+                                            <a class="logo" href="/index.php">
+                                            <img width="200px" height="51px" src="/Images/bimazone-logo.png" alt="logo"/>
+                                            </a>
+                                        </td>
+                                        <td width="76%">
+                                        <table width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="center" class="Fon" style="font-family: Square721 Cn BT; font-size: 17px; width: 17%;
+                                                    text-transform: uppercase; color: #fff; text-decoration: none;">
+                                                        <ul class="nav" style="width: 945px;">
+                                                            <li><a id="menu_class" href="http://bimazones.com/">Home</a></li>
+                                                            <li><a href="Best-child-insurance-plan-in-india.php">Child</a></li>
+                                                            <li><a href="best-online-term-insurance-plans-india.php">Term</a></li>
+                                                            <li><a href="/pension.php">Pension</a></li>
+                                                            <li><a href="health-insurance-policy-in-india.php">Health</a></li>
+                                                            <li><a href="/motor.php">Motor</a></li>
+                                                            <li><a href="/travel.php">Travel</a></li>
+                                                            <li><a href="/corporate.php">Community</a></li>
+                                                            <li><a href="/admin/user-login.php">Login</a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </td>
+                                        <td class="bimazone_number">
+                                        <img src="/Images/phone-icon-hi.png" alt="phone" style="width:20px; margin:0 6px -4px 26px;"/><span>0120-4567335</span>
+                                        <span>contacts@bimazones.com</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.nav -->
+                            <div class="clear"></div>
+                        </div>
+                        <!-- /.container -->
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+                    <!-- /#nav -->
+                    <div id="DivSlider" style="height: 450px;">
+                        <div id="banner" class="opacity2" style="position: relative; z-index: 0;">
+                            <div class="container">
+                                <img src="Images/health.jpg" alt="health" style="height: 450px; margin: 0 0 0 -115px; width: 1359px;"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="main_contnet_div">
+                    <div class="content_heading"><h2>Why Bimazones</h2></div>
+                    <div class="content_aboutus">
+                        <p>A policy  policy or to let the coverage end. This type of insurance policy contrasts  to the policy owner to decide whether to renew the term life insurance  years of age policy owner reaches 100 (i.e. death) with permanent life insurance, in which duration extends until the with a set duration limit on the coverage period. Once the policy is expired, it is up A policy  policy or to let the coverage end. This type of insurance policy of age policy owner reaches 100 (i.e. death) with permanent life insurance, in which duration extends until the with a set duration limit on the coverage period. Once the policy is expired, it is up.</p>
+                    </div>
+                </div>-->
+                   
+<table width="100%" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td style="width: 100%; background-image: linear-gradient(to bottom, hsl(55, 91%, 66%), hsl(48, 84%, 49%));">
+                <div id="DivLoading2" style="width: 100%; padding-left: 47%; padding-top: 1%; display: none;">
+                    <div style="display: block; width: 230px;">
+                        <img id="Image1" src="Images/loading.gif" alt="loading" style="height:50px;width:50px;"/>
+                    </div>
+                </div>
+                <div id="services" style="background-color:#6EBE45;">
+                    <div class="container">
+                    </div>
+                <form method="post" action="#">
+<div class="aspNetHidden">
+</div>
+
+<table width="100%">
+    <tbody><tr>
+        <td width="4%">
+        </td>
+        <td width="92%">
+            <table width="100%">
+                <tbody><tr>
+                    <td>
+                        <ul class="services">
+                            <li><a href="#"><img src="Images/328.png" alt="Auto" style="height: 75px; width: 74px; padding-bottom: 12px; padding-top: 13px;"/>
+                                
+                                    <p>Auto<br>
+                                    insurance</p>
+                            </a></li>
+                            <li><a href="health-insurance-policy-in-india.php">
+                                <img src="Images/2971921.png" alt="Health" style="padding-bottom: 15px; padding-top: 7px;"/>
+                                <p>
+                                    Health<br>
+                                    insurance</p>
+                            </a></li>
+                            <li><a href="#">
+                                <img src="Images/premier-insurance-icons51.png" alt="travel" style="height: 75px; padding: 15px 0 11px;width: 74px !important;"/>
+                                <p>
+                                    travel<br>
+                                    insurance</p>
+                            </a></li>
+                            <li><a href="#">
+                                <img src="Images/Gift.png" alt="Gift" style="height: 75px; padding: 15px 0 11px;width: 74px !important;"/>
+                                <p>
+                                    Corporate<br>
+                                    insurance</p>
+                            </a></li>
+                            <li><a href="best-online-term-insurance-plans-india.php">
+                                <img src="Images/home-image-divider-tree.png"  alt="Term" style="height: 75px; padding: 15px 0 11px;width: 74px !important;"/>
+                                <p>
+                                    Term<br>
+                                    insurance</p>
+                            </a></li>
+                            <li><a href="endowment.php">
+                                <img src="Images/services-life-big copy.png" alt="Endowment" style="padding:16px 0 12px 0;width: 74px !important; height: 75px;"/>
+                                <p>
+                                    Endowment<br>
+                                    insurance</p>
+                            </a></li>
+                            <li><a href="Best-child-insurance-plan-in-india.php">
+                                <img src="Images/children_256.png" alt="Children" style="padding:16px 0 12px 0;width: 74px !important; height: 75px;"/>
+                                <p>
+                                    Children<br>
+                                    insurance</p>
+                            </a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td width="4%">
+        </td>
+    </tr>
+</tbody></table>
+</form></div>
+
+                <!-- About Us Content On home page <div class="main_contnet_div">
+                    <div class="content_heading"><h2>About Us</h2></div>
+                    <div class="content_aboutus">
+                        <p>This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content This is about us page content</p>
+                    </div>
+                </div>-->
+            
+
+
+
+
+
+
+            </td>
+        </tr>
+
+<?php include 'footer.php'?>
+        
+        
+       
