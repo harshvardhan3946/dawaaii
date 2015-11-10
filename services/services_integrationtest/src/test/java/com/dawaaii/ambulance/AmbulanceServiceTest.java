@@ -6,6 +6,7 @@ import com.dawaaii.test.AbstractDawaaiiServiceBaseIntegrationTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
 
 /**
  * Created by rohit on 3/11/15.
@@ -24,6 +25,7 @@ public class AmbulanceServiceTest extends AbstractDawaaiiServiceBaseIntegrationT
         ambulance.setAddress("B/44 Ground Floor");
         ambulance.setContactNumber("22-1099898");
         ambulance.setMobileNumber("9999999999");
+        ambulance.setPoint(new Point(1.2313,1.3324));
 
         ambulance = ambulanceService.saveAmbulance(ambulance);
         Assert.assertNotNull(ambulance);

@@ -1,6 +1,7 @@
 package com.dawaaii.service.mongo.ambulance.model;
 
 import com.dawaaii.service.mongo.BaseDocument;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -17,6 +18,7 @@ public class Ambulance extends BaseDocument {
     private String address;
     private String contactNumber;
     private String mobileNumber;
+    private Point point;
 
     public String getServiceProviderName() {
         return serviceProviderName;
@@ -72,6 +74,14 @@ public class Ambulance extends BaseDocument {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
     }
 
     @Override
