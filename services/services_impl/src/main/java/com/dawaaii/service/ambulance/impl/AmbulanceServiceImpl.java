@@ -4,6 +4,8 @@ import com.dawaaii.service.dao.mongo.AmbulanceRepository;
 import com.dawaaii.service.mongo.ambulance.AmbulanceService;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.query.NearQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,22 +23,27 @@ public class AmbulanceServiceImpl implements AmbulanceService {
         this.ambulanceRepository = ambulanceRepository;
     }
     @Override
-    public Ambulance saveAmbulance(Ambulance ambulance) {
+    public Ambulance save(Ambulance ambulance) {
         return ambulanceRepository.save(ambulance);
     }
 
     @Override
-    public Ambulance getAmbulanceById(String id) {
+    public Ambulance getById(String id) {
         return ambulanceRepository.findOne(id);
     }
 
     @Override
-    public List<Ambulance> getAmbulance() {
+    public List<Ambulance> get() {
         return ambulanceRepository.findAll();
     }
 
     @Override
-    public Long getAmbulanceCount() {
+    public List<Ambulance> getByLocationNear(Point point) {
+        return ambulanceRepository.findByLocationNear(point);
+    }
+
+    @Override
+    public Long getCount() {
         return ambulanceRepository.count();
     }
 

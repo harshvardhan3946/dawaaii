@@ -1,6 +1,7 @@
 package com.dawaaii.service.mongo.ambulance;
 
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
+import org.springframework.data.geo.Point;
 
 import java.util.List;
 
@@ -9,13 +10,15 @@ import java.util.List;
  */
 public interface AmbulanceService {
 
-    Ambulance saveAmbulance(Ambulance ambulance);
+    Ambulance save(Ambulance ambulance);
 
-    Ambulance getAmbulanceById(String ambulanceId);
+    Ambulance getById(String ambulanceId);
 
-    List<Ambulance> getAmbulance();
+    List<Ambulance> get();
 
-    Long getAmbulanceCount();
+    List<Ambulance> getByLocationNear(Point point);
+
+    Long getCount();
 
     void confirmBooking(Ambulance ambulance);
 

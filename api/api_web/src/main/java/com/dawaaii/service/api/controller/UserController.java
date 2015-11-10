@@ -36,7 +36,6 @@ import static com.dawaaii.web.common.response.DawaaiiApiResponse.success;
 import static com.dawaaii.web.common.response.DawaaiiFieldError.parseErrors;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
 @Api(value = "/users", description = "user operations")
 @RequestMapping(value = "/users")
 @Controller
