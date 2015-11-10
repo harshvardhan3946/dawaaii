@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -47,7 +44,7 @@ public class AmbulanceController {
     @ApiOperation(value = "get Ambulance list sorted by location")
     @RequestMapping(value = "/sorted", method = GET)
     @ResponseBody
-    public ResponseEntity<DawaaiiApiResponse> getAllAmbulancesSortedByLocation(@Valid @RequestBody Point point){
+    public ResponseEntity<DawaaiiApiResponse> getAllAmbulancesSortedByLocation(@RequestBody Point point){
         return success().withEntity("Ambulances",ambulanceService.getByLocationNear(point)).respond();
     }
 }

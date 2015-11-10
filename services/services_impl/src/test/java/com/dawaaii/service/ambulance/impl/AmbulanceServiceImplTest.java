@@ -42,7 +42,7 @@ public class AmbulanceServiceImplTest{
         ambulance.setContactNumber("22-1099898");
         ambulance.setMobileNumber("9999999999");
         when(ambulanceRepository.save(ambulance)).thenReturn(ambulance);
-        ambulanceService.saveAmbulance(ambulance);
+        ambulanceService.save(ambulance);
         verify(ambulanceRepository,times(1)).save(ambulance);
     }
 }
