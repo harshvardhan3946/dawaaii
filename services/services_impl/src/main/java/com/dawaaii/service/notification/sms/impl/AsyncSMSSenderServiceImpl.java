@@ -1,7 +1,9 @@
 package com.dawaaii.service.notification.sms.impl;
 
+import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import com.dawaaii.service.notification.sms.SMSSenderService;
 import com.dawaaii.service.notification.sms.model.SendSMS;
+import com.dawaaii.service.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,4 +47,14 @@ public class AsyncSMSSenderServiceImpl implements SMSSenderService {
             LOGGER.debug("Error sending sms for request",request);
         }
    }
+
+    @Override
+    public void sendConfirmBookingSMSToAmbulance(User user, Ambulance ambulance) {
+        //TODO implement this
+    }
+
+    @Override
+    public void sendConfirmBookingSMSToUser(Ambulance ambulance, User user) {
+        //TODO implement this
+    }
 }

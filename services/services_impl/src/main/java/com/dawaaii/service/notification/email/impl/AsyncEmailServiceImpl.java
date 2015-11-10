@@ -1,6 +1,7 @@
 package com.dawaaii.service.notification.email.impl;
 
 import com.dawaaii.service.jms.impl.SimpleMessageProducer;
+import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import com.dawaaii.service.notification.email.EmailService;
 import com.dawaaii.service.notification.email.EmailService;
 import com.dawaaii.service.notification.email.model.SendEmail;
@@ -81,6 +82,16 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         emailMessage.setSimpleMessage(true);
 
         send(emailMessage);
+    }
+
+    @Override
+    public void sendConfirmBookingEmailToAmbulance(Ambulance ambulance) {
+        //TODO implement this
+    }
+
+    @Override
+    public void sendConfirmBookingEmailToUser(User user) {
+        //TODO implement this
     }
 
     private void send(SendEmail message) {
