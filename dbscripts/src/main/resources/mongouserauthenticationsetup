@@ -46,3 +46,10 @@ db.createUser(
     ]
   }
 )
+
+
+
+
+-------index on point-------
+
+db.ambulance.dropIndex({point:"2dsphere"})
