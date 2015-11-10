@@ -44,7 +44,7 @@ public class AmbulanceController {
     @ApiOperation(value = "get Ambulance list sorted by location")
     @RequestMapping(value = "/sorted", method = GET)
     @ResponseBody
-    public ResponseEntity<DawaaiiApiResponse> getAllAmbulancesSortedByLocation(@RequestBody Point point){
-        return success().withEntity("Ambulances",ambulanceService.getByLocationNear(point)).respond();
+    public ResponseEntity<DawaaiiApiResponse> getAllAmbulancesSortedByLocation(@RequestParam(value = "lat") double lat,@RequestParam(value = "lon") double lon ){
+        return success().withEntity("Ambulances",ambulanceService.getByLocationNear(new Point(lat,lon))).respond();
     }
 }

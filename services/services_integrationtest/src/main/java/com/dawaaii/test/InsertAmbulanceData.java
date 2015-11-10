@@ -16,7 +16,7 @@ public class InsertAmbulanceData {
 
     public void insertData(){
         Ambulance ambulance = createAmbulanceObject();
-        ambulanceService.saveAmbulance(ambulance);
+        ambulanceService.save(ambulance);
     }
 
     private Ambulance createAmbulanceObject(){
