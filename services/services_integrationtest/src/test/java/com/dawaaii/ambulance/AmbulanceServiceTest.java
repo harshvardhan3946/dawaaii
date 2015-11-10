@@ -27,7 +27,7 @@ public class AmbulanceServiceTest extends AbstractDawaaiiServiceBaseIntegrationT
         ambulance.setMobileNumber("9999999999");
         ambulance.setPoint(new Point(1.2313,1.3324));
 
-        ambulance = ambulanceService.saveAmbulance(ambulance);
+        ambulance = ambulanceService.save(ambulance);
         Assert.assertNotNull(ambulance);
     }
 

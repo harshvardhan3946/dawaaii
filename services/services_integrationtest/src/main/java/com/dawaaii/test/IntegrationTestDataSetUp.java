@@ -52,7 +52,7 @@ public class IntegrationTestDataSetUp {
         return userService.getUsersCount() == 0;
     }
     private boolean isFillAmbulanceData() {
-        return ambulanceService.getAmbulanceCount() == 0;
+        return ambulanceService.getCount() == 0;
     }
 
 }
