@@ -14,6 +14,7 @@ public class Ambulance extends BaseDocument {
     private String serviceProviderName;
     private String description;
     private String city;
+    private String state;
     private String area;
     private String address;
     private String contactNumber;
@@ -42,6 +43,14 @@ public class Ambulance extends BaseDocument {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getArea() {

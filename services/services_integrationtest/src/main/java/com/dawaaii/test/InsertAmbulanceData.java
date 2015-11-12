@@ -24,6 +24,7 @@ public class InsertAmbulanceData {
         ambulance.setServiceProviderName("DAWAAII");
         ambulance.setDescription("this is a new description");
         ambulance.setCity("Delhi");
+        ambulance.setState("Delhi");
         ambulance.setArea("NOIDA");
         ambulance.setAddress("B/44 Ground Floor");
         ambulance.setContactNumber("22-1099898");

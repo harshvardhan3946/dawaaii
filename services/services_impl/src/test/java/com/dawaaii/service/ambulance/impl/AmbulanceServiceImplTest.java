@@ -4,7 +4,10 @@ package com.dawaaii.service.ambulance.impl;
 import com.dawaaii.service.dao.mongo.AmbulanceRepository;
 import com.dawaaii.service.mongo.ambulance.AmbulanceService;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
+<<<<<<< HEAD
 import com.dawaaii.service.notification.email.EmailSenderService;
+=======
+>>>>>>> changes for introduction of state and entry for test data mondo
 import com.dawaaii.service.notification.email.EmailService;
 import com.dawaaii.service.notification.sms.SMSSenderService;
 import org.junit.Before;
@@ -39,7 +42,7 @@ public class AmbulanceServiceImplTest{
     @Before
     public void setUp(){
         ambulanceService = new AmbulanceServiceImpl(ambulanceRepository, emailService, smsSenderService);
-    }
+   }
 
     @Test
     public void shouldSaveValidAmbulance(){

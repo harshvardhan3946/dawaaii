@@ -21,6 +21,8 @@ public interface AmbulanceService {
 
     List<Ambulance> getByLocationNear(Point point);
 
+    List<Ambulance> getByCity(String city);
+
     Long getCount();
 
     void confirmBooking(User user, Ambulance ambulance);

@@ -15,10 +15,9 @@ import org.springframework.data.geo.Point;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.dawaaii.web.common.response.DawaaiiApiResponse.error;
 import static com.dawaaii.web.common.response.DawaaiiApiResponse.success;
@@ -74,5 +73,17 @@ public class AmbulanceController {
             return error("Ambulance could not be booked due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
         }
         return success("Ambulance booked successfully").respond();
+    }
+
+    @ApiOperation(value = "get Ambulance by city")
+    @RequestMapping(value = "/{city}",method = POST)
+    @ResponseBody
+    public ResponseEntity<DawaaiiApiResponse> bookAmbulance(@PathVariable String city){
+        try {
+            List<Ambulance> ambulanceList = ambulanceService.getByCity(city);
+            return success().withEntity("Ambulances",ambulanceList).respond();
+        }catch (Exception e){
+            return error("Ambulance could not be booked due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
+        }
     }
 }

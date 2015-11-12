@@ -54,6 +54,11 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     }
 
     @Override
+    public List<Ambulance> getByCity(String city) {
+        return ambulanceRepository.findByCity(city);
+    }
+
+    @Override
     public Long getCount() {
         return ambulanceRepository.count();
     }
