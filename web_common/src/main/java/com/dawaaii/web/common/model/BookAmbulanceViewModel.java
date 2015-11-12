@@ -1,7 +1,7 @@
 package com.dawaaii.web.common.model;
 
 /**
- * Created by root on 10/11/15.
+ * Created by rohit on 10/11/15.
  */
 public class BookAmbulanceViewModel {
     String email;

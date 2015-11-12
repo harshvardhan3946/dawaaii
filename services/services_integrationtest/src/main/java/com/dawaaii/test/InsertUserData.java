@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 /**
- * Created by root on 29/10/15.
+ * Created by rohit on 29/10/15.
  */
 @Component
 public class InsertUserData {

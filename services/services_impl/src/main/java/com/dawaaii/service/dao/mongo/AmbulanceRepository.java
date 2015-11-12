@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 /**
- * Created by root on 3/11/15.
+ * Created by rohit on 3/11/15.
  */
 public interface AmbulanceRepository extends MongoRepository<Ambulance,String> {
 

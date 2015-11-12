@@ -85,13 +85,38 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     }
 
     @Override
-    public void sendConfirmBookingEmailToAmbulance(Ambulance ambulance) {
-        //TODO implement this
+    public void sendConfirmBookingEmailToAmbulance(User user, Ambulance ambulance) {
+        try {
+            String subject = "Ambulance booking at dawaaii.in";
+            String body = "Dear " + user.getFirstName() + ",\n\nThis email" +
+                    " is a confirmation mail to confirm about an ambulance booking" +
+                    " that you have made with following details:" +
+                    "\n Ambulance details::\n" +
+                    "Ambulance address"+ambulance.getAddress()+
+                    "Ambulance contact number"+ambulance.getMobileNumber()+
+                    "\n\nCheers\nTeam Dawaaii";
+            sendEmail(from, "INFO", user.getEmail(), subject, body, null);
+
+        } catch (Exception ex) {
+            LOG.error("error while sending welcome email", ex);
+        }
     }
 
     @Override
-    public void sendConfirmBookingEmailToUser(User user) {
-        //TODO implement this
+    public void sendConfirmBookingEmailToUser(User user, Ambulance ambulance) {
+        try {
+            String subject = "Ambulance booking at dawaaii.in";
+            String body = "Dear " + ambulance.getServiceProviderName() + ",\n\nThis email" +
+                    " is a confirmation mail to confirm about your ambulance booking at dawaaii.in" +
+                    "\n Ambulance details::\n" +
+                    "Ambulance address"+ambulance.getAddress()+
+                    "Ambulance contact number"+ambulance.getMobileNumber()+
+                    "\n\nCheers\nTeam Dawaaii";
+            sendEmail(from, "INFO", user.getEmail(), subject, body, null);
+
+        } catch (Exception ex) {
+            LOG.error("error while sending welcome email", ex);
+        }
     }
 
     private void send(SendEmail message) {

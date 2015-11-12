@@ -13,5 +13,5 @@ public interface SMSSenderService {
 
     void sendConfirmBookingSMSToAmbulance(User user, Ambulance ambulance);
 
-    void sendConfirmBookingSMSToUser(Ambulance ambulance, User user);
+    void sendConfirmBookingSMSToUser(User user, Ambulance ambulance);
 }

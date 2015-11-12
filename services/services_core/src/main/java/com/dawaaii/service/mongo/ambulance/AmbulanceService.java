@@ -9,7 +9,7 @@ import org.springframework.data.geo.Point;
 import java.util.List;
 
 /**
- * Created by root on 3/11/15.
+ * Created by rohit on 3/11/15.
  */
 public interface AmbulanceService {
 
@@ -23,6 +23,6 @@ public interface AmbulanceService {
 
     Long getCount();
 
-    void confirmBooking(Ambulance ambulance, User user);
+    void confirmBooking(User user, Ambulance ambulance);
 
 }

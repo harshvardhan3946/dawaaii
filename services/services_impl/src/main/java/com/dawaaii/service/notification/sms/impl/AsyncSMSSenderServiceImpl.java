@@ -50,11 +50,13 @@ public class AsyncSMSSenderServiceImpl implements SMSSenderService {
 
     @Override
     public void sendConfirmBookingSMSToAmbulance(User user, Ambulance ambulance) {
-        //TODO implement this
+        SendSMS sendSMS = new SendSMS("ambulance booked by "+ user.getFirstName()+":: contact number::"+user.getPhoneNumber()+":: address::"+user.getAddressLine1() + " for your ambulance",ambulance.getMobileNumber());
+        sendSMS(sendSMS);
     }
 
     @Override
-    public void sendConfirmBookingSMSToUser(Ambulance ambulance, User user) {
-        //TODO implement this
+    public void sendConfirmBookingSMSToUser(User user, Ambulance ambulance) {
+        SendSMS sendSMS = new SendSMS("Hi "+ user.getFirstName()+" You have booked an ambulance :: contact number::"+ambulance.getMobileNumber()+":: address::"+ambulance.getAddress(), user.getPhoneNumber());
+        sendSMS(sendSMS);
     }
 }

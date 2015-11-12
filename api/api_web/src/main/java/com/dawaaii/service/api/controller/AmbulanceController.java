@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import static com.dawaaii.web.common.response.DawaaiiApiResponse.error;
 import static com.dawaaii.web.common.response.DawaaiiApiResponse.success;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -61,11 +63,16 @@ public class AmbulanceController {
     @RequestMapping(value = "/book",method = POST)
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> bookAmbulance(@RequestBody BookAmbulanceViewModel bookAmbulanceViewModel){
-        User user = userService.getUserByEmail(bookAmbulanceViewModel.getEmail());
-        Ambulance ambulance = ambulanceService.getById(bookAmbulanceViewModel.getAmbulanceId());
-        ambulanceService.confirmBooking(ambulance,user);
-        //TODO send booking confirmation entity
-        //further dont we need to store confirmation data
-        return null;
+        try {
+            User user = userService.getUserByEmail(bookAmbulanceViewModel.getEmail());
+            Ambulance ambulance = ambulanceService.getById(bookAmbulanceViewModel.getAmbulanceId());
+            if(user == null || ambulance == null){
+                return error("Either User or Ambulance not present", HttpStatus.BAD_REQUEST).respond();
+            }
+            ambulanceService.confirmBooking(user, ambulance);
+        }catch (Exception e){
+            return error("Ambulance could not be booked due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
+        }
+        return success("Ambulance booked successfully").respond();
     }
 }
