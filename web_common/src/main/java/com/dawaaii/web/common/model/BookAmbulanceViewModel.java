@@ -4,8 +4,9 @@ package com.dawaaii.web.common.model;
  * Created by rohit on 10/11/15.
  */
 public class BookAmbulanceViewModel {
-    String email;
-    String ambulanceId;
+
+    private String email;
+    private String ambulanceId;
 
     public String getEmail() {
         return email;
