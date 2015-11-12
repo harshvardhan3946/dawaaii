@@ -4,6 +4,9 @@ package com.dawaaii.service.ambulance.impl;
 import com.dawaaii.service.dao.mongo.AmbulanceRepository;
 import com.dawaaii.service.mongo.ambulance.AmbulanceService;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
+import com.dawaaii.service.notification.email.EmailSenderService;
+import com.dawaaii.service.notification.email.EmailService;
+import com.dawaaii.service.notification.sms.SMSSenderService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,14 +24,21 @@ import static org.powermock.api.mockito.PowerMockito.when;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({AmbulanceServiceImplTest.class})
 public class AmbulanceServiceImplTest{
+
     @Mock
     private AmbulanceRepository ambulanceRepository;
+
+    @Mock
+    private EmailService emailService;
+
+    @Mock
+    private SMSSenderService smsSenderService;
 
     private AmbulanceService ambulanceService;
 
     @Before
     public void setUp(){
-        ambulanceService = new AmbulanceServiceImpl(ambulanceRepository);
+        ambulanceService = new AmbulanceServiceImpl(ambulanceRepository, emailService, smsSenderService);
     }
 
     @Test
