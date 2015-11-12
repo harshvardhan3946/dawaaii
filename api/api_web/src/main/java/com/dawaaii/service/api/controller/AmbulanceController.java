@@ -76,7 +76,7 @@ public class AmbulanceController {
     }
 
     @ApiOperation(value = "get Ambulance by city")
-    @RequestMapping(value = "/{city}",method = POST)
+    @RequestMapping(value = "/{city}",method = GET)
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> bookAmbulance(@PathVariable String city){
         try {
