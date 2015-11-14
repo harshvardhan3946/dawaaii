@@ -6,6 +6,7 @@ package com.dawaaii.web.common.model;
 public class BookAmbulanceViewModel {
 
     private String email;
+    private String number;
     private String ambulanceId;
 
     public String getEmail() {
@@ -14,6 +15,14 @@ public class BookAmbulanceViewModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getAmbulanceId() {

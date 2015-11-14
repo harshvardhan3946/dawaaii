@@ -19,6 +19,7 @@ public class Ambulance extends BaseDocument {
     private String address;
     private String contactNumber;
     private String mobileNumber;
+    private String email;
     private Point point;
 
     public String getServiceProviderName() {
@@ -83,6 +84,14 @@ public class Ambulance extends BaseDocument {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Point getPoint() {

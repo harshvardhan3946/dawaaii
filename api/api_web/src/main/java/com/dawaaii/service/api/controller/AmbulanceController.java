@@ -63,12 +63,12 @@ public class AmbulanceController {
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> bookAmbulance(@RequestBody BookAmbulanceViewModel bookAmbulanceViewModel){
         try {
-            User user = userService.getUserByEmail(bookAmbulanceViewModel.getEmail());
+            //User user = userService.getUserByEmail(bookAmbulanceViewModel.getEmail());
             Ambulance ambulance = ambulanceService.getById(bookAmbulanceViewModel.getAmbulanceId());
-            if(user == null || ambulance == null){
+            if(ambulance == null || bookAmbulanceViewModel.getEmail()==null || bookAmbulanceViewModel.getNumber()==null){
                 return error("Either User or Ambulance not present", HttpStatus.BAD_REQUEST).respond();
             }
-            ambulanceService.confirmBooking(user, ambulance);
+            ambulanceService.confirmBooking(bookAmbulanceViewModel.getEmail(), bookAmbulanceViewModel.getNumber(), ambulance);
         }catch (Exception e){
             return error("Ambulance could not be booked due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
         }
@@ -78,7 +78,7 @@ public class AmbulanceController {
     @ApiOperation(value = "get Ambulance by city")
     @RequestMapping(value = "/{city}",method = GET)
     @ResponseBody
-    public ResponseEntity<DawaaiiApiResponse> bookAmbulance(@PathVariable String city){
+    public ResponseEntity<DawaaiiApiResponse> getAmbulanceByCity(@PathVariable String city){
         try {
             List<Ambulance> ambulanceList = ambulanceService.getByCity(city);
             return success().withEntity("Ambulances",ambulanceList).respond();

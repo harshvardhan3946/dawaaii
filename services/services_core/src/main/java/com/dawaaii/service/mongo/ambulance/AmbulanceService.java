@@ -25,6 +25,6 @@ public interface AmbulanceService {
 
     Long getCount();
 
-    void confirmBooking(User user, Ambulance ambulance);
+    void confirmBooking(String email, String number, Ambulance ambulance);
 
 }
