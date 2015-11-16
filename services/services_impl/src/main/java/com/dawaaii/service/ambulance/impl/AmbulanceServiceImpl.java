@@ -64,11 +64,12 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     }
 
     @Override
-    public void confirmBooking(User user, Ambulance ambulance) {
-        emailService.sendConfirmBookingEmailToUser(user,ambulance);
-        emailService.sendConfirmBookingEmailToAmbulance(user,ambulance);
-        smsSenderService.sendConfirmBookingSMSToUser(user,ambulance);
-        smsSenderService.sendConfirmBookingSMSToAmbulance(user,ambulance);
+    public void confirmBooking(String userEmail, String userNumber, Ambulance ambulance) {
+
+        smsSenderService.sendConfirmBookingSMSToUser(userEmail, userNumber, ambulance);
+        smsSenderService.sendConfirmBookingSMSToAmbulance(userEmail, userNumber, ambulance);
+        emailService.sendConfirmBookingEmailToUser(userEmail, ambulance);
+        emailService.sendConfirmBookingEmailToAmbulance(userEmail, userNumber, ambulance);
 
         //ToDO 1) Send Email to the ambulance service provider and user
         //Todo 2) Send sms to user and ambulance number

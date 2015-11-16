@@ -85,17 +85,17 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     }
 
     @Override
-    public void sendConfirmBookingEmailToAmbulance(User user, Ambulance ambulance) {
+    public void sendConfirmBookingEmailToUser(String userEmail, Ambulance ambulance) {
         try {
             String subject = "Ambulance booking at dawaaii.in";
-            String body = "Dear " + user.getFirstName() + ",\n\nThis email" +
+            String body = "Dear " + userEmail + ",\n\nThis email" +
                     " is a confirmation mail to confirm about an ambulance booking" +
                     " that you have made with following details:" +
                     "\n Ambulance details::\n" +
                     "Ambulance address"+ambulance.getAddress()+
                     "Ambulance contact number"+ambulance.getMobileNumber()+
                     "\n\nCheers\nTeam Dawaaii";
-            sendEmail(from, "INFO", user.getEmail(), subject, body, null);
+            sendEmail(from, "INFO", userEmail, subject, body, null);
 
         } catch (Exception ex) {
             LOG.error("error while sending welcome email", ex);
@@ -103,16 +103,16 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     }
 
     @Override
-    public void sendConfirmBookingEmailToUser(User user, Ambulance ambulance) {
+    public void sendConfirmBookingEmailToAmbulance(String userEmail, String userNumber, Ambulance ambulance) {
         try {
             String subject = "Ambulance booking at dawaaii.in";
             String body = "Dear " + ambulance.getServiceProviderName() + ",\n\nThis email" +
-                    " is a confirmation mail to confirm about your ambulance booking at dawaaii.in" +
-                    "\n Ambulance details::\n" +
-                    "Ambulance address"+ambulance.getAddress()+
-                    "Ambulance contact number"+ambulance.getMobileNumber()+
+                    " is a confirmation mail to confirm about your ambulance booking at dawaaii.in by" +
+                    "\n User Details::\n" +
+                    "User email::"+userEmail+
+                    "User contact number"+userNumber+
                     "\n\nCheers\nTeam Dawaaii";
-            sendEmail(from, "INFO", user.getEmail(), subject, body, null);
+            sendEmail(from, "INFO", ambulance.getEmail(), subject, body, null);
 
         } catch (Exception ex) {
             LOG.error("error while sending welcome email", ex);
