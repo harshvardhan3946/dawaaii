@@ -50,5 +50,5 @@ TempStatsStore/
 
 #Tomcat
 Servers/
-/dbscripts/target*
+/dbscripts/target/
 
