@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,7 +56,7 @@ public class AmbulanceController {
     @RequestMapping(value = "/sorted", method = GET)
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> getAllAmbulancesSortedByLocation(@RequestParam(value = "lat") double lat,@RequestParam(value = "lon") double lon ){
-        return success().withEntity("Ambulances",ambulanceService.getByLocationNear(new Point(lat,lon))).respond();
+        return success().withEntity("Ambulances",ambulanceService.getByLocationNear(new GeoJsonPoint(lat,lon))).respond();
     }
 
     @ApiOperation(value = "book an ambulance")

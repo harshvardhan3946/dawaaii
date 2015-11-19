@@ -1,7 +1,7 @@
 package com.dawaaii.service.mongo.ambulance.model;
 
 import com.dawaaii.service.mongo.BaseDocument;
-import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -20,7 +20,7 @@ public class Ambulance extends BaseDocument {
     private String contactNumber;
     private String mobileNumber;
     private String email;
-    private Point point;
+    private GeoJsonPoint geoJsonPoint;
 
     public String getServiceProviderName() {
         return serviceProviderName;
@@ -94,12 +94,12 @@ public class Ambulance extends BaseDocument {
         this.email = email;
     }
 
-    public Point getPoint() {
-        return point;
+    public GeoJsonPoint getGeoJsonPoint() {
+        return geoJsonPoint;
     }
 
-    public void setPoint(Point point) {
-        this.point = point;
+    public void setGeoJsonPoint(GeoJsonPoint geoJsonPoint) {
+        this.geoJsonPoint = geoJsonPoint;
     }
 
     @Override

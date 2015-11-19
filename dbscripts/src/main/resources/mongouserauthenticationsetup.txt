@@ -1,0 +1,48 @@
+http://docs.mongodb.org/manual/tutorial/deploy-replica-set-with-auth/
+
+use admin
+db.createUser( {
+    user: "siteUserAdmin",
+    pwd: "dawaaii",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  });
+db.createUser( {
+    user: "siteRootAdmin",
+    pwd: "dawaaii",
+    roles: [ { role: "root", db: "admin" } ]
+  });
+
+
+use admin
+db.auth("siteRootAdmin", "dawaaii");
+
+
+use dawaaii
+db.createUser(
+  {
+    user: "dawaaii",
+    pwd: "dawaaii",
+    roles:
+    [
+      {
+        role: "dbOwner",
+        db: "dawaaii"
+      }
+    ]
+  }
+)
+
+use dawaaii_inttest
+db.createUser(
+  {
+    user: "dawaaii",
+    pwd: "dawaaii",
+    roles:
+    [
+      {
+        role: "dbOwner",
+        db: "dawaaii_inttest"
+      }
+    ]
+  }
+)

@@ -1,10 +1,7 @@
 package com.dawaaii.service.mongo.ambulance;
 
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
-import com.dawaaii.service.user.model.User;
-import org.springframework.data.geo.GeoResult;
-import org.springframework.data.geo.GeoResults;
-import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 import java.util.List;
 
@@ -19,7 +16,7 @@ public interface AmbulanceService {
 
     List<Ambulance> get();
 
-    List<Ambulance> getByLocationNear(Point point);
+    List<Ambulance> getByLocationNear(GeoJsonPoint point);
 
     List<Ambulance> getByCity(String city);
 

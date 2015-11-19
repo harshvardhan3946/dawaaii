@@ -5,12 +5,8 @@ import com.dawaaii.service.mongo.ambulance.AmbulanceService;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import com.dawaaii.service.notification.email.EmailService;
 import com.dawaaii.service.notification.sms.SMSSenderService;
-import com.dawaaii.service.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.GeoResult;
-import org.springframework.data.geo.GeoResults;
-import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.query.NearQuery;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +24,12 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     private SMSSenderService smsSenderService;
 
     @Autowired
-    public AmbulanceServiceImpl(AmbulanceRepository ambulanceRepository, EmailService emailService, SMSSenderService smsSenderService){
+    public AmbulanceServiceImpl(AmbulanceRepository ambulanceRepository, EmailService emailService, SMSSenderService smsSenderService) {
         this.ambulanceRepository = ambulanceRepository;
         this.emailService = emailService;
         this.smsSenderService = smsSenderService;
     }
+
     @Override
     public Ambulance save(Ambulance ambulance) {
         return ambulanceRepository.save(ambulance);
@@ -49,8 +46,8 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     }
 
     @Override
-    public List<Ambulance> getByLocationNear(Point point) {
-        return ambulanceRepository.findByPointNear(point);
+    public List<Ambulance> getByLocationNear(GeoJsonPoint point) {
+        return ambulanceRepository.findByGeoJsonPoint(point);
     }
 
     @Override
