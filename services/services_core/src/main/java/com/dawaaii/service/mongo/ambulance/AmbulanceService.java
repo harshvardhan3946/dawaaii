@@ -17,7 +17,7 @@ public interface AmbulanceService {
 
     Ambulance getById(String ambulanceId);
 
-    List<Ambulance> get();
+    List<Ambulance> getAll();
 
     List<Ambulance> getByLocationNear(Point point);
 

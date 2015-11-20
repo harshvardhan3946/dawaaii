@@ -44,7 +44,7 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     }
 
     @Override
-    public List<Ambulance> get() {
+    public List<Ambulance> getAll() {
         return ambulanceRepository.findAll();
     }
 
