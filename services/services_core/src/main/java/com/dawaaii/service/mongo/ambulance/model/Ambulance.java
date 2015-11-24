@@ -2,6 +2,8 @@ package com.dawaaii.service.mongo.ambulance.model;
 
 import com.dawaaii.service.mongo.BaseDocument;
 import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -20,6 +22,7 @@ public class Ambulance extends BaseDocument {
     private String contactNumber;
     private String mobileNumber;
     private String email;
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2D)
     private Point point;
 
     public String getServiceProviderName() {
