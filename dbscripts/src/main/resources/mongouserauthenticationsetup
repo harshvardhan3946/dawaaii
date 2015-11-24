@@ -65,3 +65,5 @@ db.ambulance.insert({"serviceProviderName":"Asha Ambulance Service", "descriptio
 db.ambulance.insert({"serviceProviderName":"Shree Sai Ambulance Services", "description":"", "city":"Thane", "state":"Thane", "area":"Mira Road", "address":"Sakhare Niwas, Welkar Nagar, Mira Road, Near Post Office & Famous Company, Famous Company, Thane - 401107", "contactNumber":"22-61620459", "mobileNumber":"9999888887", "point":{"x":19.276270,"y":72.892900}, "createdOn":ISODate("2015-11-09T13:07:14.869Z")});
 db.ambulance.insert({"serviceProviderName":"test provider", "description":"", "city":"Delhi", "state":"Delhi", "area":"LaxmiNagar", "address":"C 34 Test", "contactNumber":"011-2222121", "mobileNumber":"9999999999", "point":{"x":28.636736,"y":77.274807}, "createdOn":ISODate("2015-11-09T13:07:14.869Z")});
 db.ambulance.insert({"serviceProviderName":"test provider 2", "description":"", "city":"Delhi", "state":"Delhi", "area":"InderPuri", "address":"EA-139 InderPuri", "contactNumber":"011-989898", "mobileNumber":"9999888876", "point":{"x":28.632000,"y":77.145099}, "createdOn":ISODate("2015-11-09T13:07:14.869Z")});
+
+db.ambulance.createIndex({point:"2dsphere"})
