@@ -2,9 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd"
-
-       default-lazy-init="false">
+           http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="false">
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -16,74 +14,42 @@
         <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
-    <!-- ActiveMQ Pooling JMS Connection Factory -->
-
-    <!-- start queue settings -->
-    <!-- Either use this of actievmq pooled conn factory. -->
-    <!-- 
-    <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
-        <property name="targetConnectionFactory" ref="jmsFactory"/>
-        <property name="cacheProducers" value="true"/>
-        <property name="cacheConsumers" value="true"/>
-        <property name="reconnectOnException" value="true"/>
-        <property name="exceptionListener" ref="jmsExceptionListener"/>
-        <property name="sessionCacheSize" value="10"/>
-    </bean>
-     -->
     <bean id="jmsExceptionListener" class="com.dawaaii.service.jms.impl.JmsExceptionListenerImpl"/>
 
-	<bean id="activeMQConnectionFactory" class="com.dawaaii.service.jms.impl.ActiveMQConnectionFactory">
-    	<property name="brokerURL" value="${connectionFactory.brokerURL}"/>
+    <bean id="activeMQConnectionFactory" class="com.dawaaii.service.jms.impl.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${connectionFactory.brokerURL}"/>
         <property name="prefetchPolicy" ref="prefetchPolicy"/>
         <property name="redeliveryPolicy" ref="redeliveryPolicy"/>
-        <!-- http://activemq.apache.org/consumer-dispatch-async.html
-        The default setting is dispatchAsync=true
-         If you want better thoughput and the chances of having a slow consumer are low, you may want to change this to false.
-         -->
         <property name="dispatchAsync" value="${connectionFactory.dispatchAsync}"/>
-        <!-- 
-        whether or not timestamps on messages should be disabled or not. If you disable them it adds a small performance boost.
-         Default is false
-         -->
         <property name="disableTimeStampsByDefault" value="${connectionFactory.disableTimeStampsByDefault}"/>
-
-        <!-- http://activemq.apache.org/optimized-acknowledgement.html
-        This option is disabled by default but can be used to improve throughput in some circumstances as it decreases load on the broker.
-         -->
         <property name="optimizeAcknowledge" value="${connectionFactory.optimizeAcknowledge}"/>
-        <!-- Default 300ms
-        For us, 5 sec.
-         -->
         <property name="optimizeAcknowledgeTimeOut" value="${connectionFactory.optimizeAcknowledgeTimeOut}"/>
-        <!-- http://activemq.apache.org/async-sends.html
-        The good news is that ActiveMQ sends message in async mode by default in several cases.
-        Many high performance applications are designed to be tolerate a small amount of message loss in failure scenarios. 
-         -->
         <property name="useAsyncSend" value="${connectionFactory.useAsyncSend}"/>
-
         <property name="exceptionListener" ref="jmsExceptionListener"/>
     </bean>
 
-    <bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop" init-method="start">
+    <bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop"
+          init-method="start">
         <property name="connectionFactory" ref="activeMQConnectionFactory"/>
         <property name="maxConnections" value="${pooledConnectionFactory.maxConnections}"/>
-        <property name="maximumActiveSessionPerConnection" value="${pooledConnectionFactory.maximumActiveSessionPerConnection}"/>
+        <property name="maximumActiveSessionPerConnection"
+                  value="${pooledConnectionFactory.maximumActiveSessionPerConnection}"/>
         <property name="createConnectionOnStartup" value="${pooledConnectionFactory.createConnectionOnStartup}"/>
     </bean>
 
     <bean id="redeliveryPolicy" class="org.apache.activemq.RedeliveryPolicy">
-		<property name="maximumRedeliveries" value="${queues.redeliveryPolicy.maximumRedeliveries}"/>
-		<property name="queue" value="*" />
-	</bean>
+        <property name="maximumRedeliveries" value="${queues.redeliveryPolicy.maximumRedeliveries}"/>
+        <property name="queue" value="*"/>
+    </bean>
 
-	<bean id="prefetchPolicy" class="org.apache.activemq.ActiveMQPrefetchPolicy">
-    	<property name="queuePrefetch" value="${queues.prefetchPolicy.queuePrefetch}"/>
+    <bean id="prefetchPolicy" class="org.apache.activemq.ActiveMQPrefetchPolicy">
+        <property name="queuePrefetch" value="${queues.prefetchPolicy.queuePrefetch}"/>
     </bean>
 
     <bean id="jmsTemplate" class="com.dawaaii.service.jms.impl.TimedJmsTemplate">
         <property name="connectionFactory" ref="jmsFactory"/>
         <property name="defaultDestinationName" value="myqueue"/>
-        <property name="deliveryPersistent" value="true"/> <!-- I think this is ingored if explicitQosEnabled is not set -->
+        <property name="deliveryPersistent" value="true"/>
     </bean>
 
     <bean id="simpleMessageConverter" class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
@@ -93,19 +59,38 @@
         <constructor-arg index="0" value="dawaaii.event.notification.mail"/>
     </bean>
 
-    <!--
-    <bean id="mailSenderContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <bean id="smsQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="dawaaii.event.notification.sms"/>
+    </bean>
+
+    <!--consumers-->
+    <bean id="mailSender" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="jmsFactory"/>
         <property name="destination" ref="mailQueue"/>
         <property name="messageListener">
             <bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-                <property name="delegate" ref="mailSender"/>
+                <property name="delegate" ref="asyncMailService"/>
                 <property name="defaultListenerMethod" value="send"/>
                 <property name="messageConverter" ref="simpleMessageConverter"/>
             </bean>
         </property>
+        <property name="maxConcurrentConsumers" value="5"/>
         <property name="sessionTransacted" value="true"/>
         <property name="autoStartup" value="true"/>
     </bean>
-     -->
+
+    <bean id="smsSender" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="jmsFactory"/>
+        <property name="destination" ref="smsQueue"/>
+        <property name="messageListener">
+            <bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+                <property name="delegate" ref="smsSenderServiceImpl"/>
+                <property name="defaultListenerMethod" value="send"/>
+                <property name="messageConverter" ref="simpleMessageConverter"/>
+            </bean>
+        </property>
+        <property name="maxConcurrentConsumers" value="5"/>
+        <property name="sessionTransacted" value="true"/>
+        <property name="autoStartup" value="true"/>
+    </bean>
 </beans>

@@ -3,7 +3,6 @@ package com.dawaaii.service.notification.email.impl;
 import com.dawaaii.service.jms.impl.SimpleMessageProducer;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import com.dawaaii.service.notification.email.EmailService;
-import com.dawaaii.service.notification.email.EmailService;
 import com.dawaaii.service.notification.email.model.SendEmail;
 import com.dawaaii.service.user.model.User;
 import com.dawaaii.service.user.model.UserOTP;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -40,17 +38,6 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         this.messageConverter = messageConverter;
         this.mailQueue = mailQueue;
     }
-
-/*
-    private void send(SendEmail mail) {
-        LOG.debug("Sending email message to queue: {}", mail);
-        MessageCreator messageCreator = session ->
-                messageConverter.toMessage(mail, session);
-        //jmsTemplate.send(mailQueue, messageCreator);
-
-        LOG.debug("Sending email message to queue done!");
-    }
-*/
 
     @Override
     public void sendUserOTPEmail(User user, UserOTP userOTP) {
@@ -81,7 +68,7 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         emailMessage.setBodyHtml(bodyHtml);
         emailMessage.setSimpleMessage(true);
 
-        send(emailMessage);
+        jmsTemplate.send(mailQueue, session -> messageConverter.toMessage(emailMessage, session)); //produce this to email queue
     }
 
     @Override
@@ -92,8 +79,8 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
                     " is a confirmation mail to confirm about an ambulance booking" +
                     " that you have made with following details:" +
                     "\n Ambulance details::\n" +
-                    "Ambulance address"+ambulance.getAddress()+
-                    "Ambulance contact number"+ambulance.getMobileNumber()+
+                    "Ambulance address" + ambulance.getAddress() +
+                    "Ambulance contact number" + ambulance.getMobileNumber() +
                     "\n\nCheers\nTeam Dawaaii";
             sendEmail(from, "INFO", userEmail, subject, body, null);
 
@@ -109,8 +96,8 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
             String body = "Dear " + ambulance.getServiceProviderName() + ",\n\nThis email" +
                     " is a confirmation mail to confirm about your ambulance booking at dawaaii.in by" +
                     "\n User Details::\n" +
-                    "User email::"+userEmail+
-                    "User contact number"+userNumber+
+                    "User email::" + userEmail +
+                    "User contact number" + userNumber +
                     "\n\nCheers\nTeam Dawaaii";
             sendEmail(from, "INFO", ambulance.getEmail(), subject, body, null);
 
@@ -119,7 +106,7 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         }
     }
 
-    private void send(SendEmail message) {
+    public void send(SendEmail message) {
         try {
             if (message.isSimpleMessage()) {
                 SimpleMailMessage simpleMessage = createSimpleMailMessageFor(message);
@@ -128,7 +115,6 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
             LOG.debug("Email sending done for given message: ", message);
         } catch (Exception ex) {
             LOG.error("Error sending email: " + message, ex);
-            //throw ex;
         }
     }
 

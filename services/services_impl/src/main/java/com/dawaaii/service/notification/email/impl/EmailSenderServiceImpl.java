@@ -2,10 +2,13 @@ package com.dawaaii.service.notification.email.impl;
 
 import com.dawaaii.service.notification.email.EmailSenderService;
 import com.dawaaii.service.notification.email.model.SendEmail;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -18,10 +21,23 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
+    private MessageConverter messageConverter;
+
+    @Autowired
+    private ActiveMQQueue mailQueue;
+
     @Value("${email.enabled}")
     private String mailEnabled;
 
     @Override
+    public void sendEmail(SendEmail email) {
+        jmsTemplate.send(mailQueue, session -> messageConverter.toMessage(email, session)); //produce this to email queue
+    }
+
     public void send(SendEmail message) {
         try {
             if (!Boolean.parseBoolean(mailEnabled)) {
