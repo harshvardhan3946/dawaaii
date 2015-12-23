@@ -34,8 +34,8 @@ public class IntegrationTestDataSetUp {
     @Autowired
     private InsertUserData insertUserData;
 
-    /*@Autowired
-    private InsertAmbulanceData insertAmbulanceData;*/
+    @Autowired
+    private InsertAmbulanceData insertAmbulanceData;
 
     @PostConstruct
     @Transactional
@@ -43,9 +43,9 @@ public class IntegrationTestDataSetUp {
         if (isFillUserData()) {
             insertUserData.insertData();
         }
-       /* if (isFillAmbulanceData()) {
+        if (isFillAmbulanceData()) {
             insertAmbulanceData.insertData();
-        }*/
+        }
     }
 
     private boolean isFillUserData() {

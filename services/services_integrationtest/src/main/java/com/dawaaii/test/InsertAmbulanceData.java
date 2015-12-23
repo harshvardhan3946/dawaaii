@@ -29,6 +29,7 @@ public class InsertAmbulanceData {
         ambulance.setAddress("B/44 Ground Floor");
         ambulance.setContactNumber("22-1099898");
         ambulance.setMobileNumber("9999999999");
+        ambulance.setEmail("rohit.mishra0411@gmail.com");
         return ambulance;
     }
 }

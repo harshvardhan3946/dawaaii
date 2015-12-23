@@ -5,9 +5,18 @@ package com.dawaaii.web.common.model;
  */
 public class BookAmbulanceViewModel {
 
+    private String name;
     private String email;
     private String number;
     private String ambulanceId;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;

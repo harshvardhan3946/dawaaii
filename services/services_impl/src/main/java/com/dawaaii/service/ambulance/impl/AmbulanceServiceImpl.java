@@ -5,12 +5,8 @@ import com.dawaaii.service.mongo.ambulance.AmbulanceService;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import com.dawaaii.service.notification.email.EmailService;
 import com.dawaaii.service.notification.sms.SMSSenderService;
-import com.dawaaii.service.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.GeoResult;
-import org.springframework.data.geo.GeoResults;
 import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.query.NearQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +35,11 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     }
 
     @Override
+    public Ambulance getByEmail(String email) {
+        return ambulanceRepository.findByEmail(email);
+    }
+
+    @Override
     public Ambulance getById(String id) {
         return ambulanceRepository.findOne(id);
     }
@@ -64,12 +65,12 @@ public class AmbulanceServiceImpl implements AmbulanceService {
     }
 
     @Override
-    public void confirmBooking(String userEmail, String userNumber, Ambulance ambulance) {
+    public void confirmBooking(String userEmail, String userName, String userNumber, Ambulance ambulance) {
 
-        smsSenderService.sendConfirmBookingSMSToUser(userEmail, userNumber, ambulance);
-        smsSenderService.sendConfirmBookingSMSToAmbulance(userEmail, userNumber, ambulance);
-        emailService.sendConfirmBookingEmailToUser(userEmail, ambulance);
-        emailService.sendConfirmBookingEmailToAmbulance(userEmail, userNumber, ambulance);
+        smsSenderService.sendConfirmBookingSMSToUser(userName, userNumber, ambulance);
+        smsSenderService.sendConfirmBookingSMSToAmbulance(userName, userNumber, ambulance);
+        emailService.sendConfirmBookingEmailToUser(userEmail, userName, ambulance);
+        emailService.sendConfirmBookingEmailToAmbulance(userEmail, userName, userNumber, ambulance);
 
         //ToDO 1) Send Email to the ambulance service provider and user
         //Todo 2) Send sms to user and ambulance number

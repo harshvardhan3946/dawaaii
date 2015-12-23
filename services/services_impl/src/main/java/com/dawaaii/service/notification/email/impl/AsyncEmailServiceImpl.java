@@ -11,10 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 @Service(value = "asyncMailService")
@@ -48,9 +51,8 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     public void sendWelcomeEmail(String email, String firstName) {
         try {
             String subject = "Welcome to dawaaii.in";
-            String body = "Dear " + firstName + ",\n\nThis email is intended to welcome you at dawaaii.in.\n\nCheers\nTeam Dawaaii";
-            sendEmail(from, "INFO", email, subject, body, null);
-
+            String body = "<h3>Dear " + firstName + ",</h3><p>This email is intended to welcome you at dawaaii.in.</p><br><b>Cheers,<br>Team Dawaaii</b>";
+            sendEmail(from, "INFO", email, subject, null, body);
         } catch (Exception ex) {
             LOG.error("error while sending welcome email", ex);
         }
@@ -66,55 +68,78 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         emailMessage.setSubject(subject);
         emailMessage.setBodyText(bodyText);
         emailMessage.setBodyHtml(bodyHtml);
-        emailMessage.setSimpleMessage(true);
+        emailMessage.setSimpleMessage(false);
 
         jmsTemplate.send(mailQueue, session -> messageConverter.toMessage(emailMessage, session)); //produce this to email queue
     }
 
     @Override
-    public void sendConfirmBookingEmailToUser(String userEmail, Ambulance ambulance) {
+    public void sendConfirmBookingEmailToUser(String userEmail, String userName, Ambulance ambulance) {
         try {
             String subject = "Ambulance booking at dawaaii.in";
-            String body = "Dear " + userEmail + ",\n\nThis email" +
+            String body = "<h3>Dear " + userName + ",</h3><div><p>This email" +
                     " is a confirmation mail to confirm about an ambulance booking" +
-                    " that you have made with following details:" +
-                    "\n Ambulance details::\n" +
-                    "Ambulance address" + ambulance.getAddress() +
-                    "Ambulance contact number" + ambulance.getMobileNumber() +
-                    "\n\nCheers\nTeam Dawaaii";
-            sendEmail(from, "INFO", userEmail, subject, body, null);
+                    " that you have made with following details</p><br>" +
+                    "<table border='1' padding='5px' style='border-collapse:collapse'><th colspan='2'>Ambulance details</th>" +
+                    "<tr><td>Ambulance address</td><td>" + ambulance.getAddress() +
+                    "</td></tr><td>Ambulance contact number</td><td>" + ambulance.getMobileNumber() +
+                    "</td></tr></table></div><br><br><b>Cheers,<br>Team Dawaaii</b>";
+            sendEmail(from, "INFO", userEmail, subject, null, body);
 
         } catch (Exception ex) {
-            LOG.error("error while sending welcome email", ex);
+            LOG.error("error while sending confirm booking email to user with email " + userEmail, ex);
         }
     }
 
     @Override
-    public void sendConfirmBookingEmailToAmbulance(String userEmail, String userNumber, Ambulance ambulance) {
+    public void sendConfirmBookingEmailToAmbulance(String userEmail, String userName, String userNumber, Ambulance ambulance) {
         try {
             String subject = "Ambulance booking at dawaaii.in";
-            String body = "Dear " + ambulance.getServiceProviderName() + ",\n\nThis email" +
-                    " is a confirmation mail to confirm about your ambulance booking at dawaaii.in by" +
-                    "\n User Details::\n" +
-                    "User email::" + userEmail +
-                    "User contact number" + userNumber +
-                    "\n\nCheers\nTeam Dawaaii";
-            sendEmail(from, "INFO", ambulance.getEmail(), subject, body, null);
+            String body = "<h3>Dear " + ambulance.getServiceProviderName() + ",</h3><div><p>This email" +
+                    " is a confirmation mail to confirm about your ambulance booking at dawaaii.in by</p><br>" +
+                    "<table border='1' padding='5px' style='border-collapse:collapse'><th colspan='2'>User Details</th>" +
+                    "<tr><td>Name</td><td>" + userName +
+                    "</td><tr><td>Email</td><td>" + userEmail +
+                    "</td><tr><td>Contact number</td><td>" + userNumber +
+                    "</td></tr></table></div><br><br><b>Cheers,<br>Team Dawaaii</b>";
+            sendEmail(from, "INFO", ambulance.getEmail(), subject, null, body);
 
         } catch (Exception ex) {
-            LOG.error("error while sending welcome email", ex);
+            LOG.error("error while sending confirm booking email to ambulance" + ambulance.getServiceProviderName(), ex);
         }
     }
 
-    public void send(SendEmail message) {
+    public void send(SendEmail sendEmail) {
+        System.out.println("sending email "+sendEmail.isSimpleMessage());
         try {
-            if (message.isSimpleMessage()) {
-                SimpleMailMessage simpleMessage = createSimpleMailMessageFor(message);
+            if (sendEmail.isSimpleMessage()) {
+                SimpleMailMessage simpleMessage = createSimpleMailMessageFor(sendEmail);
                 javaMailSender.send(simpleMessage);
             }
-            LOG.debug("Email sending done for given message: ", message);
+            else {
+                MimeMessagePreparator preparator = mimeMessage -> {
+                    MimeMessageHelper message;
+                    if(sendEmail.getAttachments() != null && sendEmail.getAttachments().length > 0) {
+                        message = new MimeMessageHelper(mimeMessage , true);
+                        for(String attachment:sendEmail.getAttachments()) {
+                                FileSystemResource file = new FileSystemResource(attachment);
+                                message.addAttachment(file.getFilename(), file);
+                        }
+                    }
+                    else{
+                        message = new MimeMessageHelper(mimeMessage);
+                    }
+                    message.setTo(sendEmail.getToAddress());
+                    message.setSubject(sendEmail.getSubject());
+                    message.setText(sendEmail.getBodyHtml(), true);
+                    message.setFrom(sendEmail.getFromAddress());
+                };
+                javaMailSender.send(preparator);
+            }
+            LOG.debug("Email sending done for given message: ", sendEmail);
         } catch (Exception ex) {
-            LOG.error("Error sending email: " + message, ex);
+            System.out.println("error "+ex.getMessage());
+            LOG.error("Error sending email: " + sendEmail, ex);
         }
     }
 
@@ -126,4 +151,5 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
         simpleMailMessage.setText(sendEmail.getBodyText());
         return simpleMailMessage;
     }
+
 }

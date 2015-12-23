@@ -15,4 +15,6 @@ public interface AmbulanceRepository extends MongoRepository<Ambulance,String> {
     List<Ambulance> findByPointNear(Point location);
 
     List<Ambulance> findByCity(String city);
+
+    Ambulance findByEmail(String email);
 }

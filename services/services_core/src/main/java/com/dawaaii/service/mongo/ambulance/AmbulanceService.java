@@ -15,6 +15,8 @@ public interface AmbulanceService {
 
     Ambulance save(Ambulance ambulance);
 
+    Ambulance getByEmail(String email);
+
     Ambulance getById(String ambulanceId);
 
     List<Ambulance> getAll();
@@ -25,6 +27,6 @@ public interface AmbulanceService {
 
     Long getCount();
 
-    void confirmBooking(String email, String number, Ambulance ambulance);
+    void confirmBooking(String email, String name, String number, Ambulance ambulance);
 
 }

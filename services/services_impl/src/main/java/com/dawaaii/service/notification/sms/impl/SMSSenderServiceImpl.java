@@ -73,8 +73,8 @@ public class SMSSenderServiceImpl implements SMSSenderService {
     }
 
     @Override
-    public void sendConfirmBookingSMSToUser(String userEmail, String userNumber, Ambulance ambulance) {
-        SendSMS sendSMS = new SendSMS("Hi " + userEmail + " You have booked an ambulance :: contact number::" + ambulance.getMobileNumber() + ":: address::" + ambulance.getAddress(), userNumber);
+    public void sendConfirmBookingSMSToUser(String userName, String userNumber, Ambulance ambulance) {
+        SendSMS sendSMS = new SendSMS("Hi " + userName + " You have booked an ambulance :: contact number::" + ambulance.getMobileNumber() + ":: address::" + ambulance.getAddress(), userNumber);
         sendSMS(sendSMS);
     }
 }
