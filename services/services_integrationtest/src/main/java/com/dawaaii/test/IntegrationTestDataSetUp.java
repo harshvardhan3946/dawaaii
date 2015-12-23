@@ -52,7 +52,7 @@ public class IntegrationTestDataSetUp {
         return userService.getUsersCount() == 0;
     }
     private boolean isFillAmbulanceData() {
-        return ambulanceService.getCount() == 0;
+        return ambulanceService.getByEmail("rohit.mishra0411@gmail.com")==null;
     }
 
 }
