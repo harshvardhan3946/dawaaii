@@ -3,6 +3,8 @@ package com.dawaaii.service.notification.email.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.xml.bind.JAXBContext;
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-//@Service
+@Service
 public class EmailTemplateConfigurationLoader implements InitializingBean
 {
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailTemplateConfigurationLoader.class);
@@ -22,7 +24,7 @@ public class EmailTemplateConfigurationLoader implements InitializingBean
     /* Create and store JAXB instance */
     private JAXBContext jaxbContext;
 
-//    @Autowired
+    @Autowired
     private ResourceLocator resourceLocator;
 
     @Override

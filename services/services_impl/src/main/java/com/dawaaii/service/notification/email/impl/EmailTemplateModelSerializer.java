@@ -5,12 +5,13 @@ import com.thoughtworks.xstream.XStream;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.io.*;
 import java.net.URL;
 
-//@Service
+@Service
 public class EmailTemplateModelSerializer
 {
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailTemplateModelSerializer.class);

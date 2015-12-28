@@ -13,6 +13,9 @@ import org.apache.commons.collections.BeanMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StreamUtils;
 
@@ -24,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-//@Service
+@Service
 public class EmailTemplateServiceImpl implements EmailTemplateService {
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailTemplateServiceImpl.class);
 
@@ -42,14 +45,14 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
 
     private static final String TEMPLATE_SAMPLE_MODEL_OBJECT_FILE_NAME = "sampleModel.xml";
 
-    //    @Qualifier(value="emailTemplatesConfiguration")
-//    @Autowired
+    @Qualifier(value="emailTemplatesConfiguration")
+    @Autowired
     private Configuration configuration;
-    //    @Autowired
+    @Autowired
     private EmailTemplateModelSerializer emailTemplateModelSerializer;
-    //    @Autowired
+    @Autowired
     private EmailTemplateConfigurationLoader emailTemplateConfigurationLoader;
-    //    @Autowired
+    @Autowired
     private ResourceLocator resourceLocator;
     private String templatesLocation = "classpath:/emails";
 

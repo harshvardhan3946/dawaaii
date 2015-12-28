@@ -3,7 +3,11 @@ package com.dawaaii.service.notification.email.impl;
 import com.dawaaii.service.jms.impl.SimpleMessageProducer;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import com.dawaaii.service.notification.email.EmailService;
+import com.dawaaii.service.notification.email.EmailTemplateService;
+import com.dawaaii.service.notification.email.model.EmailTemplateType;
+import com.dawaaii.service.notification.email.model.ParsedEmailTemplate;
 import com.dawaaii.service.notification.email.model.SendEmail;
+import com.dawaaii.service.notification.email.model.WelcomeEmailTemplateModel;
 import com.dawaaii.service.user.model.User;
 import com.dawaaii.service.user.model.UserOTP;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -13,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,6 +32,8 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
 
     @Value("${email.from}")
     private String from;
+    @Value("${application.web.url}")
+    private String webUrl;
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -34,6 +41,8 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     private final JmsTemplate jmsTemplate;
     private final MessageConverter messageConverter;
     private final ActiveMQQueue mailQueue;
+    @Autowired
+    private EmailTemplateService emailTemplateService;
 
     @Autowired
     public AsyncEmailServiceImpl(JmsTemplate jmsTemplate, MessageConverter messageConverter, ActiveMQQueue mailQueue) {
@@ -49,13 +58,23 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
 
     @Override
     public void sendWelcomeEmail(String email, String firstName) {
-        try {
-            String subject = "Welcome to dawaaii.in";
-            String body = "<h3>Dear " + firstName + ",</h3><p>This email is intended to welcome you at dawaaii.in.</p><br><b>Cheers,<br>Team Dawaaii</b>";
-            sendEmail(from, "INFO", email, subject, null, body);
-        } catch (Exception ex) {
-            LOG.error("error while sending welcome email", ex);
-        }
+        SendEmail emailMessage = new SendEmail();
+        WelcomeEmailTemplateModel welcomeEmailTemplateModel = new WelcomeEmailTemplateModel();
+        welcomeEmailTemplateModel.setEmail(email);
+        welcomeEmailTemplateModel.setName(firstName);
+        welcomeEmailTemplateModel.setUrl(webUrl);
+
+        ParsedEmailTemplate parsedEmailTemplate;
+        parsedEmailTemplate = emailTemplateService.loadparsedEmailTemplate(EmailTemplateType.WELCOME_EMAIL, welcomeEmailTemplateModel);
+        emailMessage.setBodyHtml(parsedEmailTemplate.getHtmlContent());
+        emailMessage.setToAddress(email);
+        emailMessage.setSubject(parsedEmailTemplate.getSubjectContent());
+        emailMessage.setFromAddress(from);
+        emailMessage.setFromName("INFO");
+        emailMessage.setSimpleMessage(false);
+        MessageCreator messageCreator = session ->
+                messageConverter.toMessage(emailMessage, session);
+        jmsTemplate.send(mailQueue, messageCreator);
     }
 
 

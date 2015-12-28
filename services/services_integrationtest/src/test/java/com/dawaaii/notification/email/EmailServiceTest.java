@@ -23,7 +23,7 @@ public class EmailServiceTest extends AbstractDawaaiiServiceBaseIntegrationTest 
     @Test
     public void testSendUserWelcomeEmail(){
         User user = userService.getUserByEmail("rohit.mishra0411@gmail.com");
-        emailService.sendWelcomeEmail(user.getFirstName() + " " + user.getLastName(),user.getFirstName());
+        emailService.sendWelcomeEmail(user.getEmail(),user.getFirstName());
     }
 
     @Test

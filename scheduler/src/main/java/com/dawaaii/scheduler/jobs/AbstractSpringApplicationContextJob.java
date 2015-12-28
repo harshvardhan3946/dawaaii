@@ -1,5 +1,6 @@
 package com.dawaaii.scheduler.jobs;
 
+import com.dawaaii.service.notification.email.EmailService;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,7 +87,7 @@ public abstract class AbstractSpringApplicationContextJob extends QuartzJobBean 
             } catch (Exception ex) {
                 LOG.error("Unexpected exception while retrieving email address from job datamap", ex);
             }
-//            EmailService emailService = (EmailService) applicationContext.getBean("asyncMailService");
+            EmailService emailService = (EmailService) applicationContext.getBean("asyncMailService");
             String subject;
             if (success) {
                 subject = "[SUCCESS]";

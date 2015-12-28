@@ -22,7 +22,7 @@ public class Ambulance extends BaseDocument {
     private String contactNumber;
     private String mobileNumber;
     private String email;
-    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2D)
+    //@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2D)
     private Point point;
 
     public String getServiceProviderName() {
