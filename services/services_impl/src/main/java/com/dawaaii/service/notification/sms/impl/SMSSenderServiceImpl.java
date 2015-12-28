@@ -50,13 +50,13 @@ public class SMSSenderServiceImpl implements SMSSenderService {
         RestTemplate restTemplate = new RestTemplate();
         StringBuilder request = new StringBuilder();
         request.append(smsBaseUrl)
-                .append("uname=")
+                .append("username=")
                 .append(username)
                 .append("&password=")
                 .append(password)
-                .append("&sender=alerts&receiver=")
+                .append("&type=0&dlr=1&destination=")
                 .append(sendSMS.getNumber())
-                .append("&route=T&msgtype=1&sms=")
+                .append("&source=TSTSMS&message=")
                 .append(sendSMS.getMessage());
         ResponseEntity<String> stringResponseEntity = restTemplate.getForEntity(request.toString(), String.class);
         if (OK == stringResponseEntity.getStatusCode()) {
