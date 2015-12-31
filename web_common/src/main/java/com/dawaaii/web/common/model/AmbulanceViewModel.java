@@ -1,6 +1,9 @@
 package com.dawaaii.web.common.model;
 
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
+import com.dawaaii.service.mongo.ambulance.model.AmbulanceType;
+
+import static com.dawaaii.service.mongo.ambulance.model.AmbulanceType.WITH_OXYGEN_CYLINDER;
 
 /**
  * Created by hojha on 19/11/15.
@@ -19,6 +22,8 @@ public class AmbulanceViewModel {
     private String email;
     private double latitude;
     private double longitude;
+    private String price;
+    private String ambulanceType;
 
     public AmbulanceViewModel() {
     }
@@ -36,6 +41,15 @@ public class AmbulanceViewModel {
         this.setEmail(ambulance.getEmail());
         this.setLatitude(ambulance.getPoint().getX());
         this.setLongitude(ambulance.getPoint().getY());
+        this.setPrice(ambulance.getPrice() == null ? "NA" : ambulance.getPrice().toString());
+        this.setAmbulanceType(getAmbulanceTypeName(ambulance.getAmbulanceType()));
+    }
+
+    private String getAmbulanceTypeName(AmbulanceType ambulanceType) {
+        if (WITH_OXYGEN_CYLINDER == ambulanceType) {
+            return "Ambulance with Oxygen.";
+        }
+        return "Normal Ambulance.";
     }
 
     public String getId() {
@@ -132,5 +146,21 @@ public class AmbulanceViewModel {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getAmbulanceType() {
+        return ambulanceType;
+    }
+
+    public void setAmbulanceType(String ambulanceType) {
+        this.ambulanceType = ambulanceType;
     }
 }

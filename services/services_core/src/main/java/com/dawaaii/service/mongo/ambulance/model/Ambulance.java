@@ -22,8 +22,10 @@ public class Ambulance extends BaseDocument {
     private String contactNumber;
     private String mobileNumber;
     private String email;
-    //@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2D)
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2D)
     private Point point;
+    private Double price;
+    private AmbulanceType ambulanceType;
 
     public String getServiceProviderName() {
         return serviceProviderName;
@@ -105,15 +107,37 @@ public class Ambulance extends BaseDocument {
         this.point = point;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public AmbulanceType getAmbulanceType() {
+        return ambulanceType;
+    }
+
+    public void setAmbulanceType(AmbulanceType ambulanceType) {
+        this.ambulanceType = ambulanceType;
+    }
+
     @Override
     public String toString() {
         return "Ambulance{" +
                 "serviceProviderName='" + serviceProviderName + '\'' +
                 ", description='" + description + '\'' +
                 ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
                 ", area='" + area + '\'' +
                 ", address='" + address + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", point=" + point +
+                ", price=" + price +
+                ", ambulanceType=" + ambulanceType +
                 '}';
     }
 }
