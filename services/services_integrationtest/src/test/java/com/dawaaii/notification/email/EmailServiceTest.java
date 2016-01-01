@@ -30,13 +30,13 @@ public class EmailServiceTest extends AbstractDawaaiiServiceBaseIntegrationTest 
     public void testSendConfirmBookingEmailToAmbulance(){
         User user = userService.getUserByEmail("rohit.mishra0411@gmail.com");
         Ambulance ambulance = ambulanceService.getByEmail("rohit.mishra0411@gmail.com");
-        emailService.sendConfirmBookingEmailToAmbulance(user.getEmail(),user.getFirstName(), user.getPhoneNumber(), ambulance);
+        emailService.sendConfirmBookingEmailToAmbulance(user.getEmail(), user.getFirstName(), user.getPhoneNumber(), user.getAddressLine1(), ambulance);
     }
 
     @Test
     public void testSendConfirmBookingEmailToUser(){
         User user = userService.getUserByEmail("rohit.mishra0411@gmail.com");
         Ambulance ambulance = ambulanceService.getByEmail("rohit.mishra0411@gmail.com");
-        emailService.sendConfirmBookingEmailToUser(user.getEmail(), user.getFirstName(), ambulance);
+        emailService.sendConfirmBookingEmailToUser(user.getEmail(), user.getFirstName(), user.getPhoneNumber(), user.getAddressLine1(), ambulance);
     }
 }

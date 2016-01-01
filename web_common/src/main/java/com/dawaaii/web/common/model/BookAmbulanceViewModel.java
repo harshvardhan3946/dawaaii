@@ -9,6 +9,7 @@ public class BookAmbulanceViewModel {
     private String email;
     private String number;
     private String ambulanceId;
+    private String address;
 
     public String getName() {
         return name;
@@ -40,5 +41,13 @@ public class BookAmbulanceViewModel {
 
     public void setAmbulanceId(String ambulanceId) {
         this.ambulanceId = ambulanceId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

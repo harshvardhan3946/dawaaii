@@ -4,10 +4,7 @@ import com.dawaaii.service.jms.impl.SimpleMessageProducer;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import com.dawaaii.service.notification.email.EmailService;
 import com.dawaaii.service.notification.email.EmailTemplateService;
-import com.dawaaii.service.notification.email.model.EmailTemplateType;
-import com.dawaaii.service.notification.email.model.ParsedEmailTemplate;
-import com.dawaaii.service.notification.email.model.SendEmail;
-import com.dawaaii.service.notification.email.model.WelcomeEmailTemplateModel;
+import com.dawaaii.service.notification.email.model.*;
 import com.dawaaii.service.user.model.User;
 import com.dawaaii.service.user.model.UserOTP;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -93,43 +90,57 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
     }
 
     @Override
-    public void sendConfirmBookingEmailToUser(String userEmail, String userName, Ambulance ambulance) {
-        try {
-            String subject = "Ambulance booking at dawaaii.in";
-            String body = "<h3>Dear " + userName + ",</h3><div><p>This email" +
-                    " is a confirmation mail to confirm about an ambulance booking" +
-                    " that you have made with following details</p><br>" +
-                    "<table border='1' padding='5px' style='border-collapse:collapse'><th colspan='2'>Ambulance details</th>" +
-                    "<tr><td>Ambulance address</td><td>" + ambulance.getAddress() +
-                    "</td></tr><td>Ambulance contact number</td><td>" + ambulance.getMobileNumber() +
-                    "</td></tr></table></div><br><br><b>Cheers,<br>Team Dawaaii</b>";
-            sendEmail(from, "INFO", userEmail, subject, null, body);
+    public void sendConfirmBookingEmailToUser(String userEmail, String userName, String userNumber, String userAddress,  Ambulance ambulance) {
+            SendEmail emailMessage = new SendEmail();
+            UserBookingTemplateModel userBookingTemplateModel = new UserBookingTemplateModel();
+            userBookingTemplateModel.setUrl(webUrl);
+            userBookingTemplateModel.setName(userName);
+            userBookingTemplateModel.setAddressLine(userAddress);
+            userBookingTemplateModel.setBookingId("");
+            userBookingTemplateModel.setPrice(ambulance.getPrice() != null ? ambulance.getPrice().toString() : "");
+            userBookingTemplateModel.setPhoneNumber(userNumber);
 
-        } catch (Exception ex) {
-            LOG.error("error while sending confirm booking email to user with email " + userEmail, ex);
-        }
+            ParsedEmailTemplate parsedEmailTemplate;
+            parsedEmailTemplate = emailTemplateService.loadparsedEmailTemplate(EmailTemplateType.USER_BOOKING_EMAIL, userBookingTemplateModel);
+
+            emailMessage.setBodyHtml(parsedEmailTemplate.getHtmlContent());
+            emailMessage.setToAddress(userEmail);
+            emailMessage.setSubject(parsedEmailTemplate.getSubjectContent());
+            emailMessage.setFromAddress(from);
+            emailMessage.setFromName("INFO");
+            emailMessage.setSimpleMessage(false);
+            MessageCreator messageCreator = session ->
+                    messageConverter.toMessage(emailMessage, session);
+            jmsTemplate.send(mailQueue, messageCreator);
     }
 
     @Override
-    public void sendConfirmBookingEmailToAmbulance(String userEmail, String userName, String userNumber, Ambulance ambulance) {
-        try {
-            String subject = "Ambulance booking at dawaaii.in";
-            String body = "<h3>Dear " + ambulance.getServiceProviderName() + ",</h3><div><p>This email" +
-                    " is a confirmation mail to confirm about your ambulance booking at dawaaii.in by</p><br>" +
-                    "<table border='1' padding='5px' style='border-collapse:collapse'><th colspan='2'>User Details</th>" +
-                    "<tr><td>Name</td><td>" + userName +
-                    "</td><tr><td>Email</td><td>" + userEmail +
-                    "</td><tr><td>Contact number</td><td>" + userNumber +
-                    "</td></tr></table></div><br><br><b>Cheers,<br>Team Dawaaii</b>";
-            sendEmail(from, "INFO", ambulance.getEmail(), subject, null, body);
+    public void sendConfirmBookingEmailToAmbulance(String userEmail, String userName, String userNumber, String userAddress, Ambulance ambulance) {
+        SendEmail emailMessage = new SendEmail();
+        AmbulanceBookingTemplateModel ambulanceBookingTemplateModel = new AmbulanceBookingTemplateModel();
+        ambulanceBookingTemplateModel.setUrl(webUrl);
+        ambulanceBookingTemplateModel.setName(userName);
+        ambulanceBookingTemplateModel.setAddressLine(userAddress);
+        ambulanceBookingTemplateModel.setBookingId("");
+        ambulanceBookingTemplateModel.setPrice(ambulance.getPrice() != null ? ambulance.getPrice().toString() : "");
+        ambulanceBookingTemplateModel.setPhoneNumber(userNumber);
 
-        } catch (Exception ex) {
-            LOG.error("error while sending confirm booking email to ambulance" + ambulance.getServiceProviderName(), ex);
-        }
+        ParsedEmailTemplate parsedEmailTemplate;
+        parsedEmailTemplate = emailTemplateService.loadparsedEmailTemplate(EmailTemplateType.AMBULANCE_BOOKING_TEMPLATE, ambulanceBookingTemplateModel);
+
+        emailMessage.setBodyHtml(parsedEmailTemplate.getHtmlContent());
+        emailMessage.setToAddress(userEmail);
+        emailMessage.setSubject(parsedEmailTemplate.getSubjectContent());
+        emailMessage.setFromAddress(from);
+        emailMessage.setFromName("INFO");
+        emailMessage.setSimpleMessage(false);
+        MessageCreator messageCreator = session ->
+                messageConverter.toMessage(emailMessage, session);
+        jmsTemplate.send(mailQueue, messageCreator);
     }
 
     public void send(SendEmail sendEmail) {
-        System.out.println("sending email "+sendEmail.isSimpleMessage());
+        LOG.info("sending email ",sendEmail.isSimpleMessage());
         try {
             if (sendEmail.isSimpleMessage()) {
                 SimpleMailMessage simpleMessage = createSimpleMailMessageFor(sendEmail);
@@ -157,7 +168,6 @@ public class AsyncEmailServiceImpl extends SimpleMessageProducer implements Emai
             }
             LOG.debug("Email sending done for given message: ", sendEmail);
         } catch (Exception ex) {
-            System.out.println("error "+ex.getMessage());
             LOG.error("Error sending email: " + sendEmail, ex);
         }
     }

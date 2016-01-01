@@ -9,11 +9,17 @@ public class UserBookingTemplateModel implements EmailTemplateModel {
 
     private String url;
 
-    private String userName;
+    private String name;
 
-    private String ambulanceAddress;
+    private String addressLine;
 
-    private String ambulanceMobileNumber;
+    private String bookingId;
+
+    private String price;
+
+    private String phoneNumber;
+
+    //private String ambulanceMobileNumber;
 
     @Override
     public String getUrl() {
@@ -24,27 +30,43 @@ public class UserBookingTemplateModel implements EmailTemplateModel {
         this.url = url;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAmbulanceAddress() {
-        return ambulanceAddress;
+    public String getAddressLine() {
+        return addressLine;
     }
 
-    public void setAmbulanceAddress(String ambulanceAddress) {
-        this.ambulanceAddress = ambulanceAddress;
+    public void setAddressLine(String addressLine) {
+        this.addressLine = addressLine;
     }
 
-    public String getAmbulanceMobileNumber() {
-        return ambulanceMobileNumber;
+    public String getBookingId() {
+        return bookingId;
     }
 
-    public void setAmbulanceMobileNumber(String ambulanceMobileNumber) {
-        this.ambulanceMobileNumber = ambulanceMobileNumber;
+    public void setBookingId(String bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
