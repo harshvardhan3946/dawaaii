@@ -1,0 +1,1 @@
+${messages["ambulancebookingemail.ftl.message.subject"]}
