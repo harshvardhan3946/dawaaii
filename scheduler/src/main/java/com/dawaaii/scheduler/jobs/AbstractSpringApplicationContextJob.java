@@ -25,14 +25,14 @@ import java.util.Date;
  */
 public abstract class AbstractSpringApplicationContextJob extends QuartzJobBean //implements Job
 {
-    public static final String SCHEDULER_REPORT_EMAILADDRESS_DATAMAPKEY = "scheduler.report.emailaddress";
+    private static final String SCHEDULER_REPORT_EMAILADDRESS_DATAMAPKEY = "scheduler.report.emailaddress";
 
     private static final String APPLICATION_CONTEXT_KEY = "applicationContext";
 
-    private Logger LOG = LoggerFactory.getLogger(AbstractSpringApplicationContextJob.class);
+    private final Logger LOG = LoggerFactory.getLogger(AbstractSpringApplicationContextJob.class);
 
     protected final ApplicationContext getApplicationContext(JobExecutionContext context) throws JobExecutionException {
-        ApplicationContext appCtx = null;
+        ApplicationContext appCtx;
         try {
             appCtx = (ApplicationContext) context.getScheduler().getContext().get(APPLICATION_CONTEXT_KEY);
         } catch (Exception ex) {
@@ -45,7 +45,7 @@ public abstract class AbstractSpringApplicationContextJob extends QuartzJobBean 
         return appCtx;
     }
 
-    protected EntityManager getPersistentContext(final JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    private EntityManager getPersistentContext(final JobExecutionContext jobExecutionContext) throws JobExecutionException {
         ApplicationContext applicationContext = getApplicationContext(jobExecutionContext);
         EntityManagerFactory entityManagerFactory = (EntityManagerFactory) applicationContext.getBean("entityManagerFactory");
         return entityManagerFactory.createEntityManager();
@@ -112,15 +112,15 @@ public abstract class AbstractSpringApplicationContextJob extends QuartzJobBean 
                 sbTextBody.append("\n\n");
                 sbTextBody.append("Root cause of failure:\n");
                 sbTextBody.append("======================\n");
-                sbTextBody.append(rootCause + "\n");
+                sbTextBody.append(rootCause).append("\n");
                 for (StackTraceElement stackTraceElement : rootCause.getStackTrace()) {
-                    sbTextBody.append("\t" + "at " + stackTraceElement + "\n");
+                    sbTextBody.append("\t" + "at ").append(stackTraceElement).append("\n");
                 }
                 Throwable underLyingCause = rootCause.getCause();
                 while (underLyingCause != null) {
-                    sbTextBody.append("\nCaused by: " + underLyingCause + "\n");
+                    sbTextBody.append("\nCaused by: ").append(underLyingCause).append("\n");
                     for (StackTraceElement stackTraceElement : underLyingCause.getStackTrace()) {
-                        sbTextBody.append("\t" + "at " + stackTraceElement + "\n");
+                        sbTextBody.append("\t" + "at ").append(stackTraceElement).append("\n");
                     }
                     underLyingCause = underLyingCause.getCause();
                 }
@@ -145,29 +145,29 @@ public abstract class AbstractSpringApplicationContextJob extends QuartzJobBean 
         // Job information
         JobDetail jobDetail = context.getJobDetail();
         if (jobDetail != null) {
-            sb.append("FullName: " + jobDetail.getKey().getName() + "\n");
-            sb.append("JobClass: " + jobDetail.getJobClass().getName() + "\n");
+            sb.append("FullName: ").append(jobDetail.getKey().getName()).append("\n");
+            sb.append("JobClass: ").append(jobDetail.getJobClass().getName()).append("\n");
         }
         // Trigger information
         Trigger trigger = context.getTrigger();
         if (trigger != null) {
-            sb.append("TriggerName: " + trigger.getKey().getName() + "\n");
+            sb.append("TriggerName: ").append(trigger.getKey().getName()).append("\n");
         }
         // Time information
-        sb.append("ScheduledFireTime: " + context.getScheduledFireTime() + "\n");
-        sb.append("FireTime: " + context.getFireTime() + "\n");
+        sb.append("ScheduledFireTime: ").append(context.getScheduledFireTime()).append("\n");
+        sb.append("FireTime: ").append(context.getFireTime()).append("\n");
         // sb.append("JobRuntTime: " + context.getJobRunTime() + "\n"); returns -1, I think this only is available if
         // Job has returned to the scheduler
         DecimalFormat df = new DecimalFormat("0.##");
         double runTimeInMinutes = (reportTime.getTime() - context.getFireTime().getTime()) / 1000d / 60d;
-        sb.append("RunTimeInMinutes: " + df.format(runTimeInMinutes) + "\n");
-        sb.append("NextFireTime: " + context.getNextFireTime() + "\n");
+        sb.append("RunTimeInMinutes: ").append(df.format(runTimeInMinutes)).append("\n");
+        sb.append("NextFireTime: ").append(context.getNextFireTime()).append("\n");
         // Data information
         JobDataMap jobDataMap = context.getMergedJobDataMap();
         if (jobDataMap != null && jobDataMap.getKeys().length > 0) {
             sb.append("JobData: \n");
             for (String key : jobDataMap.getKeys()) {
-                sb.append("\t" + key + "=" + jobDataMap.get(key) + "\n");
+                sb.append("\t").append(key).append("=").append(jobDataMap.get(key)).append("\n");
             }
         }
         return sb.toString();

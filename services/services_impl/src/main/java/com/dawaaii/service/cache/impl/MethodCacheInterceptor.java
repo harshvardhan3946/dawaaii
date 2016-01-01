@@ -2,6 +2,7 @@ package com.dawaaii.service.cache.impl;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import net.sf.ehcache.Cache;
@@ -125,7 +126,7 @@ public class MethodCacheInterceptor implements MethodInterceptor, InitializingBe
         if (object instanceof Iterable) {
             return (Iterable) object;
         }
-        return Arrays.asList(object);
+        return Collections.singletonList(object);
     }
 
     @Override

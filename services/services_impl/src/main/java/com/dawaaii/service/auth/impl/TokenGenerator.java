@@ -20,9 +20,9 @@ import java.util.UUID;
 @Component
 public class TokenGenerator {
 
-    public static final long ACCESS_TOKEN_EXPIRY_DAYS = 30;
+    private static final long ACCESS_TOKEN_EXPIRY_DAYS = 30;
     public static final long USER_OTP_EXPIRY_DAYS = 1;
-    public static final long USER_OTP_EXPIRY_MINUTES = 15;
+    private static final long USER_OTP_EXPIRY_MINUTES = 15;
 
     public AccessToken generateAccessToken(User user) {
         AccessToken accessToken = new AccessToken();

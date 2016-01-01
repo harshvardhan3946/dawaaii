@@ -20,13 +20,13 @@ import com.dawaaii.service.cache.CacheableEntity;
 public class BaseEntity implements TimeStampedAuditable, Serializable, CacheableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+	private Long id;
     
     @Column(name = "createdon", nullable = false)
-    protected Date createdOn;
+	private Date createdOn;
     
     @Column(name = "updatedon")
-    protected Date updatedOn;
+	private Date updatedOn;
 
 	public void setId(Long id) {
         this.id = id;

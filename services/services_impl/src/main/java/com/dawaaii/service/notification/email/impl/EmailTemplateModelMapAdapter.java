@@ -46,7 +46,7 @@ public class EmailTemplateModelMapAdapter implements EmailTemplateModel, Map<Str
         return delegate.remove(key);
     }
 
-    public void putAll(Map<? extends String, ? extends Object> m) {
+    public void putAll(Map<? extends String, ?> m) {
         delegate.putAll(m);
     }
 

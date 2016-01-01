@@ -2,7 +2,6 @@ package com.dawaaii.service.api.controller;
 
 import com.dawaaii.service.mongo.ambulance.AmbulanceService;
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
-import com.dawaaii.service.user.UserService;
 import com.dawaaii.web.common.model.AmbulanceViewModel;
 import com.dawaaii.web.common.model.BookAmbulanceViewModel;
 import com.dawaaii.web.common.response.DawaaiiApiResponse;
@@ -34,14 +33,11 @@ public class AmbulanceController {
 
     private final static Logger LOG = LoggerFactory.getLogger(AmbulanceController.class);
 
-    private AmbulanceService ambulanceService;
-
-    private UserService userService;
+    private final AmbulanceService ambulanceService;
 
     @Autowired
-    public AmbulanceController(AmbulanceService ambulanceService, UserService userService) {
+    public AmbulanceController(AmbulanceService ambulanceService) {
         this.ambulanceService = ambulanceService;
-        this.userService = userService;
     }
 
     @ApiOperation(value = "getAll ambulance list")
@@ -78,6 +74,7 @@ public class AmbulanceController {
             }
             ambulanceService.confirmBooking(bookAmbulanceViewModel.getEmail(), bookAmbulanceViewModel.getName(), bookAmbulanceViewModel.getNumber(), ambulance);
         } catch (Exception e) {
+            LOG.error("error while booking ambulance " + e);
             return error("Ambulance could not be booked due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
         }
         return success("Ambulance booked successfully").respond();

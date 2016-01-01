@@ -118,7 +118,7 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
         Assert.notNull(templateName, "Template name should not be null");
         LOGGER.debug("Parsing email template for key - {}", templateName);
         ParsedEmailTemplate parsedEmailTemplate = new ParsedEmailTemplate(templateName);
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+        Map<String, Object> modelMap = new HashMap<>();
         if (templateModel instanceof EmailTemplateModelMapAdapter) {
             modelMap.putAll((Map<? extends String, ? extends Object>) templateModel);
         }
@@ -138,7 +138,7 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
     }
 
     private EmailTemplateConfigurationModel loadEmailtemplateConfiguration(final String templateFolderResourcePath) {
-        EmailTemplateConfigurationModel templateConfiguration = null;
+        EmailTemplateConfigurationModel templateConfiguration;
         try {
             templateConfiguration = emailTemplateConfigurationLoader.loadEmailTemplateConfiguration(templateFolderResourcePath);
         } catch (Exception ex) {
@@ -211,32 +211,25 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
     }
 
     private String getTemplateMessagesFileName(final String templateName) {
-        final StringBuilder filePathBuilder = new StringBuilder();
-        filePathBuilder.append(templateName).append('_');
-        filePathBuilder.append('.').append(TEMPLATE_MESSAGES_FILE_EXTENSION);
-        return filePathBuilder.toString();
+        return templateName + '_' + '.' + TEMPLATE_MESSAGES_FILE_EXTENSION;
     }
 
     @Override
     public String parseTemplate(final String templateName, final EmailTemplateField field, final Map<String, Object> model) {
         String key = templateName + ";" + field.name();
         try {
-            Template template = null;
+            Template template;
             try {
                 template = configuration.getTemplate(key);
             } catch (FileNotFoundException ex) {
                 // Compile the body of the template
-                StringBuilder builder = new StringBuilder();
-                builder.append(loadTemplateContentFromFileSystem(templateName, field));
-                template = new Template(key, new StringReader(builder.toString()), configuration);
+                template = new Template(key, new StringReader(String.valueOf(loadTemplateContentFromFileSystem(templateName, field))), configuration);
             }
             StringWriter writer = new StringWriter();
             template.process(model, writer);
             writer.flush();
             return writer.toString();
-        } catch (IOException e) {
-            LOGGER.error("Error parsing a freemarker template (" + templateName + ") for key: " + key, e);
-        } catch (TemplateException e) {
+        } catch (IOException | TemplateException e) {
             LOGGER.error("Error parsing a freemarker template (" + templateName + ") for key: " + key, e);
         }
         return "";

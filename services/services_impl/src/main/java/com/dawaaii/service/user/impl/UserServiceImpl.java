@@ -22,6 +22,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service(value = "userService")
@@ -29,12 +30,12 @@ public class UserServiceImpl implements UserService {
 
     private final static Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    private UserRepository userRepository;
-    private UserOneTimePasswordRepository userOneTimePasswordRepository;
-    private EmailService asyncMailService;
-    private TokenGenerator tokenGenerator;
-    private DawaaiiRoleService dawaaiiRoleService;
-    private OTPRequestService otpRequestService;
+    private final UserRepository userRepository;
+    private final UserOneTimePasswordRepository userOneTimePasswordRepository;
+    private final EmailService asyncMailService;
+    private final TokenGenerator tokenGenerator;
+    private final DawaaiiRoleService dawaaiiRoleService;
+    private final OTPRequestService otpRequestService;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
@@ -113,7 +114,7 @@ public class UserServiceImpl implements UserService {
 
         User existingUser = userOptional.get();
 
-        Optional<UserOTP> userOTPOptional = null;
+        Optional<UserOTP> userOTPOptional;
         if (otpSource.equals(OTPSource.MOBILE)) {
             userOTPOptional = Optional.ofNullable(userOneTimePasswordRepository.
                     findByUserAndOtpTypeAndOtpSourceAndOtpAndUsedAndExpiresOnGreaterThan(existingUser, OTPType.FORGOT_PASSWORD, otpSource, optUniqueCodeOrOtp, false, new Date()));
@@ -127,7 +128,7 @@ public class UserServiceImpl implements UserService {
         }
 
         UserOTP userOTP = userOTPOptional.get();
-        if (userOTP.getUser().getId() != existingUser.getId()) {
+        if (!Objects.equals(userOTP.getUser().getId(), existingUser.getId())) {
             throw new CoreException(Messages.OPERATION_NOT_ALLOWED);
         }
         existingUser.setPassword(user.getPassword());

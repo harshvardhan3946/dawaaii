@@ -44,9 +44,8 @@ public class EmailSenderServiceImpl implements EmailSenderService {
                 LOG.error("Emails disabled on the system, not sending given message: {}", message);
                 return;
             }
-            SendEmail sendEmail = message;
-            if (sendEmail.isSimpleMessage()) {
-                SimpleMailMessage simpleMessage = createSimpleMailMessageFor(sendEmail);
+            if (message.isSimpleMessage()) {
+                SimpleMailMessage simpleMessage = createSimpleMailMessageFor(message);
                 javaMailSender.send(simpleMessage);
             }
             LOG.debug("Email sending done for given message: ", message);

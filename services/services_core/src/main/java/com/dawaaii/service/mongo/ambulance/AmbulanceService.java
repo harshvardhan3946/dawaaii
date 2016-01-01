@@ -1,9 +1,6 @@
 package com.dawaaii.service.mongo.ambulance;
 
 import com.dawaaii.service.mongo.ambulance.model.Ambulance;
-import com.dawaaii.service.user.model.User;
-import org.springframework.data.geo.GeoResult;
-import org.springframework.data.geo.GeoResults;
 import org.springframework.data.geo.Point;
 
 import java.util.List;

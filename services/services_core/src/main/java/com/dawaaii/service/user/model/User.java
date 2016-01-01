@@ -2,6 +2,7 @@ package com.dawaaii.service.user.model;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -113,17 +114,17 @@ public class User extends BaseEntity {
     public void generatePasswordHash() {
         byte[] bytes = new byte[20];
         new SecureRandom().nextBytes(bytes);
-        String passwordSalt = bytes.toString();
+        String passwordSalt = Arrays.toString(bytes);
         generatePasswordHashUsingSalt(passwordSalt);
     }
 
-    public void generatePasswordHashUsingSalt(String passwordSalt) {
+    private void generatePasswordHashUsingSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
         this.passwordHash = Encoder.hash(password, passwordSalt);
     }
 
     public void addRole(Role role){
-        if(roles == null) roles = new ArrayList<Role>();
+        if(roles == null) roles = new ArrayList<>();
         roles.add(role);
     }
 

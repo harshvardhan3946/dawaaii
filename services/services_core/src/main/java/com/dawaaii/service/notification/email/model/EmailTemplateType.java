@@ -15,7 +15,7 @@ public enum EmailTemplateType {
     private static final Map<String, EmailTemplateType> EMAIL_TEMPLATE_NAME_TYPE_MAPPING;
 
     static {
-        final Map<String, EmailTemplateType> tempMap = new HashMap<String, EmailTemplateType>();
+        final Map<String, EmailTemplateType> tempMap = new HashMap<>();
         for (EmailTemplateType templateType : EmailTemplateType.values()) {
             tempMap.put(templateType.getTemplateName(), templateType);
         }

@@ -29,12 +29,8 @@ public class SimpleMessageProducer
 
     protected void send(Destination consumerDestination, final Object wrapperForJMS)
     {
-        jmsTemplate.send(consumerDestination, new MessageCreator()
-        {
-            public Message createMessage(final Session session) throws JMSException
-            {
-                return messageConverter.toMessage(wrapperForJMS, session);
-            }
+        jmsTemplate.send(consumerDestination, session -> {
+            return messageConverter.toMessage(wrapperForJMS, session);
         });
     }
 
@@ -52,28 +48,24 @@ public class SimpleMessageProducer
         {
             destination = queueName;
         }
-        return (Boolean) jmsTemplate.browse(destination, new BrowserCallback()
-        {
-            public Object doInJms(Session session, QueueBrowser browser) throws JMSException
+        return (Boolean) jmsTemplate.browse(destination, (session, browser) -> {
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start();
+            Enumeration enumeration = browser.getEnumeration();
+            while (enumeration.hasMoreElements())
             {
-                StopWatch stopWatch = new StopWatch();
-                stopWatch.start();
-                Enumeration enumeration = browser.getEnumeration();
-                while (enumeration.hasMoreElements())
+                Message message = (Message) enumeration.nextElement();
+                String id = message.getStringProperty("id");
+                if (jmsMessageId.equals(id))
                 {
-                    Message message = (Message) enumeration.nextElement();
-                    String id = message.getStringProperty("id");
-                    if (jmsMessageId.equals(id))
-                    {
-                        LOG.debug("Existing message with id '{}' was found on queue '{}', searching took: {}ms", new Object[] {
-                                jmsMessageId, destination, stopWatch.getTime() });
-                        return Boolean.TRUE;
-                    }
+                    LOG.debug("Existing message with id '{}' was found on queue '{}', searching took: {}ms", new Object[] {
+                            jmsMessageId, destination, stopWatch.getTime() });
+                    return Boolean.TRUE;
                 }
-                LOG.debug("Existing message with id '{}' was not found on queue '{}', total searchtime: {}ms", new Object[] { jmsMessageId,
-                        destination, stopWatch.getTime() });
-                return Boolean.FALSE;
             }
+            LOG.debug("Existing message with id '{}' was not found on queue '{}', total searchtime: {}ms", new Object[] { jmsMessageId,
+                    destination, stopWatch.getTime() });
+            return Boolean.FALSE;
         });
     }
 

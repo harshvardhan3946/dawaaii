@@ -19,6 +19,6 @@ public class DawaiiDateTime {
     }
 
     public interface FreezedStateExecution {
-        public void execute();
+        void execute();
     }
 }

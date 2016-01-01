@@ -47,74 +47,44 @@ public class HazelcastClientServiceImpl implements HazelcastClientService
     @Override
     public Set<Member> getClusterMembers()
     {
-        final HazelcastClusterOperation<Set<Member>> operation = new HazelcastClusterOperation<Set<Member>>()
-        {
-            @Override
-            public Set<Member> executeHazelcastOperation()
-            {
-                return getClient().getCluster().getMembers();
-            }
-        };
-        final Set<Member> result = executeHazelcastOperation(operation);
-        return result;
+        final HazelcastClusterOperation<Set<Member>> operation = () -> getClient().getCluster().getMembers();
+        return executeHazelcastOperation(operation);
     }
 
     @Override
     public <K, V> IMap<K, V> getMap(final String name)
     {
-        final HazelcastClusterOperation<IMap<K, V>> operation = new HazelcastClusterOperation<IMap<K, V>>()
-        {
-            @Override
-            public IMap<K, V> executeHazelcastOperation()
-            {
-                return getClient().getMap(name);
-            }
-        };
-        final IMap<K, V> result = executeHazelcastOperation(operation);
-        return result;
+        final HazelcastClusterOperation<IMap<K, V>> operation = () -> getClient().getMap(name);
+        return executeHazelcastOperation(operation);
     }
 
     @Override
     public Config getConfig()
     {
-        final HazelcastClusterOperation<Config> operation = new HazelcastClusterOperation<Config>()
-        {
-            @Override
-            public Config executeHazelcastOperation()
-            {
-                return getClient().getConfig();
-            }
-        };
-        final Config result = executeHazelcastOperation(operation);
-        return result;
+        final HazelcastClusterOperation<Config> operation = () -> getClient().getConfig();
+        return executeHazelcastOperation(operation);
     }
 
     @Override
     public SerializationService getSerializationService()
     {
-        final HazelcastClusterOperation<SerializationService> operation = new HazelcastClusterOperation<SerializationService>()
-        {
-            @Override
-            public SerializationService executeHazelcastOperation()
+        final HazelcastClusterOperation<SerializationService> operation = () -> {
+            final HazelcastInstance instance = getClient();
+            if (instance instanceof HazelcastInstanceProxy)
             {
-                final HazelcastInstance instance = getClient();
-                if (instance instanceof HazelcastInstanceProxy)
-                {
-                    return ((HazelcastInstanceProxy) instance).getSerializationService();
-                }
-                else if (instance instanceof HazelcastInstanceImpl)
-                {
-                    ((HazelcastInstanceImpl) instance).getSerializationService();
-                }
-                else if (instance instanceof HazelcastClientProxy)
-                {
-                    return ((HazelcastClientProxy) instance).getSerializationService();
-                }
-                throw new IllegalArgumentException();
+                return ((HazelcastInstanceProxy) instance).getSerializationService();
             }
+            else if (instance instanceof HazelcastInstanceImpl)
+            {
+                ((HazelcastInstanceImpl) instance).getSerializationService();
+            }
+            else if (instance instanceof HazelcastClientProxy)
+            {
+                return ((HazelcastClientProxy) instance).getSerializationService();
+            }
+            throw new IllegalArgumentException();
         };
-        final SerializationService result = executeHazelcastOperation(operation);
-        return result;
+        return executeHazelcastOperation(operation);
     }
 
     /* Utility methods */
@@ -256,7 +226,7 @@ public class HazelcastClientServiceImpl implements HazelcastClientService
     }
 
     /* Inner classes */
-    private static interface HazelcastClusterOperation<T>
+    private interface HazelcastClusterOperation<T>
     {
         T executeHazelcastOperation();
     }

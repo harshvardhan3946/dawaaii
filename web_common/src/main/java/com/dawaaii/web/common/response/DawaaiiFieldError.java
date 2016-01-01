@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DawaaiiFieldError {
-    private String errorCode;
+    private final String errorCode;
 
-    private String field;
+    private final String field;
 
     public DawaaiiFieldError(FieldError fieldError) {
         field = fieldError.getField();

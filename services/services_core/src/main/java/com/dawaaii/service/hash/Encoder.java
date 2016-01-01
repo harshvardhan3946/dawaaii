@@ -27,7 +27,7 @@ public class Encoder {
     }
 
     protected static String base64ToBase62(String base64) {
-        StringBuffer buf = new StringBuffer(base64.length() * 2);
+        StringBuilder buf = new StringBuilder(base64.length() * 2);
 
         for (int i = 0; i < base64.length(); i++) {
             char ch = base64.charAt(i);

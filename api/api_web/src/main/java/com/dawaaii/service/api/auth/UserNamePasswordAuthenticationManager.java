@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class UserNamePasswordAuthenticationManager implements AuthenticationManager {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserNamePasswordAuthenticationManager(UserService userService) {
         this.userService = userService;

@@ -7,15 +7,14 @@ import com.dawaaii.service.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.Date;
 import java.util.Optional;
 
 @Service
 public class AccessTokenServiceImpl implements AccessTokenService {
-    private AccessTokenRepository accessTokenRepository;
-    private TokenGenerator tokenGenerator;
+    private final AccessTokenRepository accessTokenRepository;
+    private final TokenGenerator tokenGenerator;
 
     @Autowired
     public AccessTokenServiceImpl(AccessTokenRepository accessTokenRepository, TokenGenerator tokenGenerator) {

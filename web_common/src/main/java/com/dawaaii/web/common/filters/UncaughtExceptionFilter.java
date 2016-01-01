@@ -32,7 +32,7 @@ public class UncaughtExceptionFilter implements Filter
 
     private String getParameters(final ServletRequest request)
     {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(">> Parameters >");
         Enumeration<?> parameterNames = request.getParameterNames();
         String separator = "";
@@ -40,7 +40,7 @@ public class UncaughtExceptionFilter implements Filter
         {
             String key = (String) parameterNames.nextElement();
             String[] values = request.getParameterValues(key);
-            StringBuffer totalValue = new StringBuffer();
+            StringBuilder totalValue = new StringBuilder();
             String valueSep = "";
             for (String value : values)
             {

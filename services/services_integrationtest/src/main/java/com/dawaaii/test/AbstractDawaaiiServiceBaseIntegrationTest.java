@@ -15,7 +15,7 @@ public abstract class AbstractDawaaiiServiceBaseIntegrationTest extends Abstract
     //	@PersistenceContext(type = javax.persistence.PersistenceContextType.EXTENDED,
 //	        properties = @PersistenceProperty(name="org.hibernate.flushMode", value="COMMIT"))
     @PersistenceContext
-    protected EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Autowired
     protected EntityManagerFactory emf;

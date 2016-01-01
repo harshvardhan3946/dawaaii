@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 
 public class ClientBasicAuthManager implements AuthenticationManager {
 
-    private ClientDetailsService clientDetailsService;
+    private final ClientDetailsService clientDetailsService;
 
     public ClientBasicAuthManager(ClientDetailsService clientDetailsService) {
         this.clientDetailsService = clientDetailsService;

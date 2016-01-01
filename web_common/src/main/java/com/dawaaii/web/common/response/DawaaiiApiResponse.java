@@ -15,11 +15,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 public class DawaaiiApiResponse {
 
-    public static final String ERROR = "error";
-    public static final String SUCCESS = "success";
-    public static final String CONTENT_TYPE = "Content-Type";
-    private Map<String, Object> data = new HashMap<>();
-    private HttpStatus httpStatus;
+    private static final String ERROR = "error";
+    private static final String SUCCESS = "success";
+    private static final String CONTENT_TYPE = "Content-Type";
+    private final Map<String, Object> data = new HashMap<>();
+    private final HttpStatus httpStatus;
 
     public DawaaiiApiResponse(String messageKey, String message, HttpStatus httpStatus) {
         addData(messageKey, message);
@@ -27,7 +27,7 @@ public class DawaaiiApiResponse {
     }
 
     private void addData(String key, Object data) {
-        if(StringUtils.isEmpty(key) || StringUtils.isEmpty(data)) return;;
+        if(StringUtils.isEmpty(key) || StringUtils.isEmpty(data)) return;
         this.data.put(key, data);
     }
 

@@ -49,7 +49,7 @@ public class Role extends BaseEntity {
 
     public List<Permission> getPermissions() {
         if (permissions == null) {
-            permissions = new ArrayList<Permission>();
+            permissions = new ArrayList<>();
         }
         return permissions;
     }

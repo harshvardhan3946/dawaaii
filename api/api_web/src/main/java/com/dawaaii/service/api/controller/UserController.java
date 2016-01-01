@@ -43,14 +43,14 @@ public class UserController extends APIBaseController {
 
     private final static Logger LOG = LoggerFactory.getLogger(UserController.class);
 
-    public static final String USER_ENTITY_KEY = "user";
+    private static final String USER_ENTITY_KEY = "user";
 
     public static final String OTP_UNIQUE_CODE = "otp";
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
-    private JdbcTokenStore tokenStore;
+    private final JdbcTokenStore tokenStore;
 
     @Autowired
     private OTPRequestService otpRequestService;
