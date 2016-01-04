@@ -72,7 +72,7 @@ public class AmbulanceController {
             if (ambulance == null || bookAmbulanceViewModel.getEmail() == null || bookAmbulanceViewModel.getNumber() == null) {
                 return error("Either User or Ambulance not present", HttpStatus.BAD_REQUEST).respond();
             }
-            ambulanceService.confirmBooking(bookAmbulanceViewModel.getEmail(), bookAmbulanceViewModel.getName(), bookAmbulanceViewModel.getNumber(), ambulance);
+            ambulanceService.confirmBooking(bookAmbulanceViewModel.getEmail(), bookAmbulanceViewModel.getName(), bookAmbulanceViewModel.getNumber(), bookAmbulanceViewModel.getAddress(), ambulance);
         } catch (Exception e) {
             LOG.error("error while booking ambulance " + e);
             return error("Ambulance could not be booked due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();

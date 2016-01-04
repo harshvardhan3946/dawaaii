@@ -13,8 +13,8 @@ public interface EmailService {
 
     void sendEmail(String fromAddress, String string, String emailAddress, String subject, String bodyText, String bodyHtml);
 
-    void sendConfirmBookingEmailToAmbulance(String userEmail, String userName, String userNumber, Ambulance ambulance);
+    void sendConfirmBookingEmailToAmbulance(String userEmail, String userName, String userNumber, String userAddress, Ambulance ambulance);
 
-    void sendConfirmBookingEmailToUser(String userEmail, String userName, Ambulance ambulance);
+    void sendConfirmBookingEmailToUser(String userEmail, String userName, String userNumber, String userAddress, Ambulance ambulance);
 
 }

@@ -6,7 +6,10 @@ import java.util.Map;
 
 public enum EmailTemplateType {
     UNDEFINED_TEMPLATE_TYPE("undefined"),
-    WELCOME_EMAIL("welcomeemail");
+    WELCOME_EMAIL("welcomeemail"),
+    USER_BOOKING_EMAIL("userbookingemail"),
+    AMBULANCE_BOOKING_TEMPLATE("ambulancebookingemail");
+
 
 
     /* Template name */
