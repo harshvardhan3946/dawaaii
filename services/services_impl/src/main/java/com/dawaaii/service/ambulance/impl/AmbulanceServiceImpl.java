@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -80,5 +81,10 @@ public class AmbulanceServiceImpl implements AmbulanceService {
 
         ambulanceBookingService.auditBooking(new AmbulanceBooking(userName, userEmail, userNumber, ambulance.getId()));
 
+    }
+
+    @Override
+    public List<Ambulance> getUpdatedAfter(Long timeStamp) {
+        return ambulanceRepository.findByUpdatedOnAfter(new Date(timeStamp));
     }
 }

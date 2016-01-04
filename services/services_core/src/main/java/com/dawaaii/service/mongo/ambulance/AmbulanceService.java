@@ -26,4 +26,5 @@ public interface AmbulanceService {
 
     void confirmBooking(String email, String name, String number, Ambulance ambulance);
 
+    List<Ambulance> getUpdatedAfter(Long timeStamp);
 }

@@ -4,6 +4,7 @@ import com.dawaaii.service.mongo.ambulance.model.Ambulance;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ public interface AmbulanceRepository extends MongoRepository<Ambulance, String> 
     List<Ambulance> findByCity(String city);
 
     Ambulance findByEmail(String email);
+
+    List<Ambulance> findByUpdatedOnAfter(Date date);
 }

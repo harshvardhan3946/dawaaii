@@ -91,7 +91,22 @@ public class AmbulanceController {
                             .map(AmbulanceViewModel::new)
                             .collect(Collectors.toList())).respond();
         } catch (Exception e) {
-            return error("Ambulance could not be booked due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
+            return error("Ambulance could not be fetched by city due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
+        }
+    }
+
+    @ApiOperation(value = "get latest update for ambulance since timestamp")
+    @RequestMapping(value = "updates/{timeStamp}", method = GET)
+    @ResponseBody
+    public ResponseEntity<DawaaiiApiResponse> getUpdatedAmbulance(@PathVariable Long timeStamp) {
+        try {
+            return success().withEntity("Ambulances",
+                    ambulanceService.getUpdatedAfter(timeStamp)
+                            .stream()
+                            .map(AmbulanceViewModel::new)
+                            .collect(Collectors.toList())).respond();
+        } catch (Exception e) {
+            return error("Latest update for Ambulance could not be fetched due to exception " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR).respond();
         }
     }
 }
