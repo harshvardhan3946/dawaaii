@@ -156,8 +156,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.18.1</version>
+                    <version>2.19.1</version>
                     <configuration>
+                        <!--<additionalClasspathElements>-->
+                            <!--<additionalClasspathElement>${basedir}/services/services_impl/lib/TrueMD_JAVA_sdk.jar</additionalClasspathElement>-->
+                        <!--</additionalClasspathElements>-->
                     </configuration>
                 </plugin>
                 <plugin>
@@ -172,8 +175,31 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                    <executions>
+                        <execution>
+                            <id>install-truemd</id>
+                            <goals>
+                                <goal>install-file</goal>
+                            </goals>
+                            <phase>initialize</phase>
+                            <configuration>
+                                <groupId>com.truemd</groupId>
+                                <artifactId>trumdapi</artifactId>
+                                <version>1.0</version>
+                                <packaging>jar</packaging>
+                                <generatePom>true</generatePom>
+                                <createChecksum>true</createChecksum>
+                                <file>${basedir}/services/services_impl/lib/TrueMD_JAVA_sdk.jar</file>
+                            </configuration>
+                            <inherited>false</inherited>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
 </project>

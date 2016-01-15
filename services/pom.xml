@@ -19,8 +19,5 @@
     <modules>
         <module>services_core</module>
         <module>services_impl</module>
-        <module>services_integrationtest</module>
     </modules>
-
-
 </project>

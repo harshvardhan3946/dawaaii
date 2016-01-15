@@ -136,6 +136,8 @@
         <sec:intercept-url pattern="/rest/ambulances" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/rest/ambulances/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/rest/ambulances/updates/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/medicines/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/rest/medicines/detail/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/rest/**" access="ROLE_API_USER"/>
         <sec:custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER"/>
         <sec:http-basic entry-point-ref="oauthAuthenticationEntryPoint"/>
