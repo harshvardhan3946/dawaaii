@@ -40,6 +40,6 @@ public class MedicineController {
     @RequestMapping(value = "detail/{medicineName}", method = GET)
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> getMedicineDetails(@PathVariable String medicineName) {
-        return success().withEntity("suggestions", medicineService.getMedicineDetails(medicineName)).respond();
+        return success().withEntity("details", medicineService.getMedicineDetails(medicineName)).respond();
     }
 }
