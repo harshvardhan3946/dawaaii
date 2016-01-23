@@ -33,6 +33,7 @@ public class MedicineController {
     @RequestMapping(value = "/{medicineName}", method = GET)
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> getMedicineSuggestion(@PathVariable String medicineName) {
+        LOG.debug("suggesting auto complete for "+medicineName);
         return success().withEntity("suggestions", medicineService.suggestMedicine(medicineName)).respond();
     }
 
@@ -40,6 +41,7 @@ public class MedicineController {
     @RequestMapping(value = "detail/{medicineName}", method = GET)
     @ResponseBody
     public ResponseEntity<DawaaiiApiResponse> getMedicineDetails(@PathVariable String medicineName) {
+        LOG.debug("finding details for "+medicineName);
         return success().withEntity("details", medicineService.getMedicineDetails(medicineName)).respond();
     }
 }

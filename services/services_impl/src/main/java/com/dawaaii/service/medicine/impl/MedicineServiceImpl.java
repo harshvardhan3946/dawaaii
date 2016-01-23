@@ -37,7 +37,7 @@ public class MedicineServiceImpl implements MedicineService {
     @Value("${online.medicine.truemd.api.key}")
     private String apiKey;//8bdb823ced65ee20c8925b381f5390
 
-    private TrueMDAPI trueMDAPI;
+    private static final TrueMDAPI trueMDAPI = new TrueMDAPI();
 
     private static final RadixTree<String> radixTree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
 
